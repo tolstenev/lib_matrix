@@ -6,8 +6,8 @@
  * The s21_matrix.h library is intended for processing numerical matrices
  * in the C programming language.
  *
- * Библиотека s21_matrix.h предназначения для обработки числовых матриц
- * на языке программировния C.
+ * Библиотека s21_matrix.h предназначена для обработки числовых матриц
+ * на языке программирования C.
  */
 
 #ifndef SRC_S21_MATRIX_H_
@@ -23,11 +23,12 @@
 
 // Структура матрицы
 typedef struct matrix_struct {
-  double** matrix;
+  double **matrix;
   int rows;
   int columns;
 } matrix_t;
 
+// Основные функции библиотеки
 int s21_create_matrix(int rows, int columns, matrix_t *result);
 void s21_remove_matrix(matrix_t *A);
 int s21_eq_matrix(matrix_t *A, matrix_t *B);
