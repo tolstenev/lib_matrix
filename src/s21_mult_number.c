@@ -8,12 +8,17 @@
 #include "s21_matrix.h"
 
 /**
- *
+ * Функция s21_mult_number выполняет умножение матрицы А на число number.
+ * Результат умножения записывается в матрицу result.
  * @param A
  * @param number
  * @param result
- * @return
+ * @return  0 - OK;
+ *          1 - Ошибка, некорректная матрица;
+ *          2 - Ошибка вычисления.
  */
 int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
+    int resulting_code = 0;
 
+    return (resulting_code);
 }

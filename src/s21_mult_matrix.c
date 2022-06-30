@@ -8,12 +8,17 @@
 #include "s21_matrix.h"
 
 /**
- *
+ * Функция s21_mult_matrix выполняет умножение матрицы А на матрицу В.
+ * Результат умножения записывается в матрицу result.
  * @param A
- * @param B
+ * @param number
  * @param result
- * @return
+ * @return  0 - OK;
+ *          1 - Ошибка, некорректная матрица;
+ *          2 - Ошибка вычисления.
  */
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
+    int resulting_code = 0;
 
+    return (resulting_code);
 }

@@ -8,12 +8,17 @@
 #include "s21_matrix.h"
 
 /**
- *
+ * Функция s21_sub_matrix выполняет вычитание матрицы А из матрицы В.
+ * Разность записывается в матрицу result.
  * @param A
  * @param B
  * @param result
- * @return
+ * @return  0 - OK;
+ *          1 - Ошибка, некорректная матрица;
+ *          2 - Ошибка вычисления.
  */
 int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
+    int resulting_code = 0;
 
+    return (resulting_code);
 }

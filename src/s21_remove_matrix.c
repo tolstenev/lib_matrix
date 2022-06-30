@@ -8,7 +8,7 @@
 #include "s21_matrix.h"
 
 /**
- *
+ * Функция s21_remove_matrix удаляет матрицу по указателю А.
  * @param A
  */
 void s21_remove_matrix(matrix_t *A) {

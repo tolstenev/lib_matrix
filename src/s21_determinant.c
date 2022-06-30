@@ -8,7 +8,8 @@
 #include "s21_matrix.h"
 
 /**
- * Функция s21_determinant
+ * Функция s21_determinant вычисляет определитель матрицы.
+ * Результат вычисления записывается в result.
  * @param A
  * @param result
  * @return  0 - OK;
@@ -16,5 +17,7 @@
  *          2 - Ошибка вычисления.
  */
 int s21_determinant(matrix_t *A, double *result) {
+    int resulting_code = 0;
 
+    return (resulting_code);
 }

@@ -18,5 +18,7 @@
  *          2 - Ошибка вычисления.
  */
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
+    int resulting_code = 0;
 
+    return (resulting_code);
 }

@@ -8,11 +8,16 @@
 #include "s21_matrix.h"
 
 /**
- *
+ * Функция s21_calc_complements вычисляет алгебраическое дополнение
+ * для матрицы А. Результат вычисления записывается в матрицу result.
  * @param A
  * @param result
- * @return
+ * @return  0 - OK;
+ *          1 - Ошибка, некорректная матрица;
+ *          2 - Ошибка вычисления.
  */
 int s21_calc_complements(matrix_t *A, matrix_t *result) {
+    int resulting_code = 0;
 
+    return (resulting_code);
 }

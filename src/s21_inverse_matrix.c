@@ -8,7 +8,8 @@
 #include "s21_matrix.h"
 
 /**
- *
+ * Функция s21_inverse_matrix вычисляет обратную матрицу для матрицы А.
+ * Результат вычисления записывается в матрицу result.
  * @param A
  * @param result
  * @return  0 - OK;
@@ -16,5 +17,7 @@
  *          2 - Ошибка вычисления.
  */
 int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
+    int resulting_code = 0;
 
+    return (resulting_code);
 }
