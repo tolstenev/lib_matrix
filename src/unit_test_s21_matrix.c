@@ -12,52 +12,38 @@
 
 
 START_TEST(test_s21_create_matrix) {
-
 }
 END_TEST
 
 START_TEST(test_s21_remove_matrix) {
-
 }
 END_TEST
 
 START_TEST(test_s21_eq_matrix) {
-
 }
 END_TEST
 
 START_TEST(test_s21_sum_matrix) {
-
 }
 END_TEST
 
 START_TEST(test_s21_sub_matrix) {
-
 }
 END_TEST
 
 START_TEST(test_s21_mult_number) {
-
 }
 END_TEST
 
 START_TEST(test_s21_mult_matrix) {
-
-}
-END_TEST
-
-START_TEST(test_s21_create_matrix) {
-
 }
 END_TEST
 
 START_TEST(test_s21_transpose) {
-
 }
 END_TEST
 
 START_TEST(test_s21_calc_complements) {
-
 }
 END_TEST
 

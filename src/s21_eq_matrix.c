@@ -8,12 +8,14 @@
 #include "s21_matrix.h"
 
 /**
- * Функция s21_eq_matrix проверяет равенство матриц А и В.
+ * @brief Функция проверяет равенство матриц А и В.
  * @param A
  * @param B
  * @return  1 - ОК, матрицы равны;
  *          2 - Матрицы не равны.
  */
 int s21_eq_matrix(matrix_t *A, matrix_t *B) {
+    int rescode = 1;
 
+    return (rescode);
 }
