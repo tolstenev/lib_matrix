@@ -15,6 +15,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
 #include <math.h>
 
 // Возвращаемые значения функции s21_eq_matrix
@@ -40,5 +42,12 @@ void s21_remove_matrix(matrix_t *A);
 // int s21_calc_complements(matrix_t *A, matrix_t *result);
 // int s21_determinant(matrix_t *A, double *result);
 // int s21_inverse_matrix(matrix_t *A, matrix_t *result);
+
+// Вспомогательные функции бибилиотеки
+void s21_print_matrix(matrix_t *A);
+void s21_halt_programm_memory_error(void);
+void s21_fill_matrix(matrix_t *A, double value);
+void s21_fill_matrix_rand(matrix_t *A);
+int s21_get_number(void);
 
 #endif  // SRC_S21_MATRIX_H_

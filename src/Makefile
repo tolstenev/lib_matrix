@@ -25,7 +25,8 @@ HEADER		:= s21_matrix.h
 
 CC			:= gcc
 CFLAGS		:= -std=c11 -pedantic -Wall -Werror -Wextra
-SRCS		:= s21_create_matrix.c \
+SRCS		:= s21_support_function.c \
+			   s21_create_matrix.c \
 			   s21_remove_matrix.c
 OBJS		:= $(SRCS:.c=.o)
 
@@ -86,18 +87,18 @@ check_valgrind: $(NAME)
 		CK_FORK=no valgrind --leak-check=full -s ./$(TEST)
 
 clean:
-		rm -rf $(OBJS) ./GcovReport ./*.gcov ./*.gcno ./*.gcda ./report ./*.info ./*.dSYM ./$(TEST) $(PRINT_TEST)
+		rm -rf $(OBJS) ./GcovReport ./*.gcov ./*.gcno ./*.gcda ./report ./*.info ./*.dSYM ./$(TEST) $(PRINT_TEST) ./a.out
 
 fclean: clean
 		rm -rf $(NAME)
 
 re:
 		$(MAKE) fclean
-		$(MAKE) all
+		$(MAKE) $(NAME)
 
 .PHONY: all test check check_valgrind clean fclean re
 
-t:
+t: $(NAME)
 		@clear
 		@$(CC) $< $(PRINT_TEST).c $(NAME) -o $(PRINT_TEST)
 		@./$(PRINT_TEST)

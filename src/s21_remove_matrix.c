@@ -6,7 +6,7 @@
  */
 
 #include "s21_matrix.h"
-
+#include <errno.h>
 /**
  * @brief Функция удаляет матрицу по указателю А.
  * @param A - указатель на матрицу
