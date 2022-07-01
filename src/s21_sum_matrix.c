@@ -22,9 +22,9 @@ int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 
     // Добавить проверку адекватности матриц через отдельную чек-функцию
 
-    if (NULL == A || NULL == B || NULL == result) {
+    /*if (NULL == A || NULL == B || NULL == result) {
         errcode = 1;
-    } else if (A->rows != B->rows || A->columns != B->columns) {
+    } else */if (A->rows != B->rows || A->columns != B->columns) {
         errcode = 2;
     } else {
         for (int i = 0; i < result->columns; ++i) {
