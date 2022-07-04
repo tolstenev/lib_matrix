@@ -9,8 +9,8 @@
 #define s21_get_var_name(var)  #var
 
 int main(void) {
-    matrix_t A = {0};
-    int i = 9;
+    matrix_t A = {NULL, 0, 0};
+    int i = 3;
     s21_create_matrix(i, i, &A);
 
     s21_print_matrix(&A);

@@ -12,6 +12,35 @@
 
 
 START_TEST(test_s21_create_matrix) {
+    // Создание адекватной матрицы
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+    int src_1_rows = 3;
+    int src_1_cols = 3;
+    matrix_t src_1 = {NULL, 0, 0};
+
+    buffer_errcode_1 = s21_create_matrix(src_1_rows, src_1_cols, &src_1);
+
+    ck_assert_int_eq(src_1_rows, src_1.rows);
+    ck_assert_int_eq(src_1_cols, src_1.columns);
+    ck_assert_ptr_nonnull(src_1.matrix);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1);
+
+    // ОШИБКИ
+    // Проверка на некорректные значения количства рядов и колонок
+    int correct_result_of_error = INCORRECT_MATRIX;
+    int buffer_result_for_error = 42;
+    int src_2_rows = -21;
+    int src_2_cols = -21;
+    matrix_t src_2 = {NULL, 0, 0};
+
+    buffer_result_for_error = s21_create_matrix(src_2_rows, src_2_cols, &src_2);
+
+    ck_assert_int_eq(correct_result_of_error, buffer_result_for_error);
+
+    s21_remove_matrix(&src_2);
 }
 END_TEST
 

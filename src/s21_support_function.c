@@ -12,13 +12,10 @@
  */
 int s21_get_number(void) {
     // Инициализируем карту значений
-    int array[16] =
-        {
-            21,  4,   8, 15,
-            16, 23,  42, 0,
-            97,  10,  7, 24,
-            81, 1, 73, 68
-        };
+    const int array[16] = {21,  4,   8, 15,
+                           16, 23,  42, 0,
+                           97,  10,  7, 24,
+                           81, 1, 73, 68 };
     // Инициализируем переменную для отслеживания количества вызовов функции
     static int i = 0;
     // Инкрементируем значение с каждым вызовом функции
@@ -48,7 +45,7 @@ void s21_print_matrix(matrix_t *A) {
 // * и записывает его в поток вывода ошибок, устанавливая соответствующее
 // * значение в errno.
 // */
-//void s21_halt_programm_memory_error(void) {
+// void s21_halt_programm_memory_error(void) {
 //    errno = ENOMEM;
 //    fprintf(stderr, "Error: %s", strerror(errno));
 //    exit(0);
