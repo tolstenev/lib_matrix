@@ -10,27 +10,31 @@
 /**
  * @brief Функция выполняет сложение матриц А и В. Сумма
  * записывается в матрицу result.
- * @param A
- * @param B
- * @param result
+ * @param A - указатель на матрицу (первое слагаемое),
+ * @param B - указатель на матрицу (второе слагаемое),
+ * @param result - указатель на результат сложения.
  * @return  0 - OK;
  *          1 - Ошибка, некорректная матрица;
  *          2 - Ошибка вычисления.
  */
 int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
-    int errcode = 0;
+    // Объявление переменной для возвращаемого кода ошибки
+    int errcode = OK;
 
-    // Добавить проверку адекватности матриц через отдельную чек-функцию
-
-    /*if (NULL == A || NULL == B || NULL == result) {
-        errcode = 1;
-    } else */if (A->rows != B->rows || A->columns != B->columns) {
-        errcode = 2;
+    if (s21_check_matrix(A) == INCORRECT_MATRIX ||
+        s21_check_matrix(B) == INCORRECT_MATRIX) {
+        // Код ошибки 1, если матрица А, матрица В - некорректные.
+        errcode = INCORRECT_MATRIX;
+    } else if (A->rows != B->rows || A->columns != B->columns) {
+        // Код ошибки 2, если размеры матриц не совпадают
+        errcode = CALC_ERROR;
     } else {
+        // Создание матрицы под результат сложения
+        s21_create_matrix(A->rows, A->columns, result);
+        // Поэлементное сложение матриц А и В
         for (int i = 0; i < result->columns; ++i) {
-            for (int j = 0; j < result->rows; ++j) {
+            for (int j = 0; j < result->rows; ++j)
                 result->matrix[i][j] = A->matrix[i][j] + B->matrix[i][j];
-            }
         }
     }
     return (errcode);

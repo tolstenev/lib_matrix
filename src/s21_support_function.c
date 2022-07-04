@@ -30,7 +30,7 @@ int s21_get_number(void) {
 
 /**
  * @brief Функция выводит на экран матрицу А.
- * @param A
+ * @param A - указатель на матрицу.
  */
 void s21_print_matrix(matrix_t *A) {
     putchar('\n');
@@ -56,8 +56,8 @@ void s21_print_matrix(matrix_t *A) {
 
 /**
  * @brief Заполняет матрицу А значение value
- * @param A
- * @param value
+ * @param A - указатель на матрицу,
+ * @param value - заполняемое значение.
  */
 void s21_fill_matrix(matrix_t *A, double value) {
     for (int i = 0; i < A->rows; ++i) {
@@ -69,7 +69,7 @@ void s21_fill_matrix(matrix_t *A, double value) {
 
 /**
  * @brief Заполняет матрицу А псевдослучайными значениями
- * @param A
+ * @param A - указатель на матрицу.
  */
 void s21_fill_matrix_rand(matrix_t *A) {
     for (int i = 0; i < A->rows; ++i) {
@@ -77,4 +77,18 @@ void s21_fill_matrix_rand(matrix_t *A) {
             A->matrix[i][j] = s21_get_number();
         }
     }
+}
+
+/**
+ * @brief Проверяет корректность матрицы (указатель и размеры)
+ * @param m - указатель на матрицу.
+ * @return  0 - OK;
+ *          1 - Ошибка, некорректная матрица;
+ */
+int s21_check_matrix(matrix_t *m) {
+    int errcode = 0;
+    if (NULL == m || m->rows < 1 || m->columns < 1) {
+        errcode = 1;
+    }
+    return errcode;
 }

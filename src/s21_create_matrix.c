@@ -19,13 +19,10 @@
  */
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
     // Объявление переменной для возвращаемого кода ошибки
-    int errcode = 0;
-    if (NULL == result) {
-        // Код ошибки 1, если указатель result - некорректный
-        errcode = 1;
-    } else if (rows < 1 || columns < 1) {
+    int errcode = OK;
+    if (rows < 1 || columns < 1) {
         // Код ошибки 1, если rows или columns - некорректные
-        errcode = 1;
+        errcode = INCORRECT_MATRIX;
     } else {
         // Инициализация количества рядов и колонок в структуру матрицы
         result->rows = rows;
@@ -35,7 +32,7 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
 
         if (NULL == result->matrix) {
             // Код ошибки 1, если память матрицы не была выделена
-            errcode = 1;
+            errcode = INCORRECT_MATRIX;
         } else {
             // Инициализация указателей на строки матрицы
             for (int i = 0; i < rows; i++) {

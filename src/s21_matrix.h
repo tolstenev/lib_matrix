@@ -23,6 +23,16 @@
 #define SUCCESS 1
 #define FAILURE 0
 
+// Проверяемая точность вычислений
+#define EPS 1e-6
+
+// Числовые коды ошибок работы функций
+enum {
+  OK = 0,
+  INCORRECT_MATRIX = 1,
+  CALC_ERROR = 2,
+};
+
 // Структура матрицы
 typedef struct matrix_struct {
   double **matrix;
@@ -49,5 +59,6 @@ void s21_halt_programm_memory_error(void);
 void s21_fill_matrix(matrix_t *A, double value);
 void s21_fill_matrix_rand(matrix_t *A);
 int s21_get_number(void);
+int s21_check_matrix(matrix_t *m);
 
 #endif  // SRC_S21_MATRIX_H_
