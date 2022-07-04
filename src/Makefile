@@ -27,7 +27,10 @@ CC			:= gcc
 CFLAGS		:= -std=c11 -pedantic -Wall -Werror -Wextra
 SRCS		:= s21_support_function.c \
 			   s21_create_matrix.c \
-			   s21_remove_matrix.c
+			   s21_remove_matrix.c \
+			   s21_eq_matrix.c \
+			   s21_sum_matrix.c \
+			   s21_sub_matrix.c
 OBJS		:= $(SRCS:.c=.o)
 
 PRINT_TEST	:= print_matrix
@@ -39,7 +42,7 @@ GCOVFLAGS	:= -fprofile-arcs -ftest-coverage
 CHECK_FLAGS	:= -lcheck
 
 
-all: info
+all: s21_matrix.a
 
 info:
 		@echo "Available make targets:"
@@ -53,16 +56,19 @@ info:
 		@echo "  re:              remove all generated files and recompile library"
 
 s21_matrix.a: $(OBJS)
+		@clear
 		ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
 		$(CC) $(CFLAGS) -c $< -o $@
 
 test: $(NAME)
+		@clear
 		$(CC) $< $(SRC_TEST) $(NAME) $(CHECK_FLAGS) -o $(TEST)
 		./$(TEST)
 
 gcov_report:
+		@clear
 		$(CC) $(GCOVFLAGS) $(SRC_TEST) $(SRCS) $(CHECK_FLAGS) -o $(REPORT)
 		./$(REPORT)
 		lcov -t "$(REPORT)" -o $(REPORT).info -c -d .
@@ -71,6 +77,7 @@ gcov_report:
 		@echo Code coverage report generated. To view the report via web-browser, enter the command \"open ./report/index.html\"
 
 check: $(NAME)
+		@clear
 		@echo ---------------------CPPCHECK---------------------
 		cppcheck --enable=all --suppress=missingIncludeSystem . $(HEADER) $(SRCS)
 		@echo ---------------------CPPLINT----------------------
@@ -82,15 +89,18 @@ check: $(NAME)
 		CK_FORK=no leaks --atExit -- ./$(TEST)
 
 check_valgrind: $(NAME)
+		@clear
 		@echo -------------------MEMORY_LEAKS-------------------
 		$(CC) -g $(SRC_TEST) $(NAME) $(CHECK_FLAGS) -o $(TEST)
 		CK_FORK=no valgrind --leak-check=full -s ./$(TEST)
 
 clean:
 		rm -rf $(OBJS) ./GcovReport ./*.gcov ./*.gcno ./*.gcda ./report ./*.info ./*.dSYM ./$(TEST) $(PRINT_TEST) ./a.out
+		@clear
 
 fclean: clean
 		rm -rf $(NAME)
+		@clear
 
 re:
 		$(MAKE) fclean
