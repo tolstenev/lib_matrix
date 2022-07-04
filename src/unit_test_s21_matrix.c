@@ -16,7 +16,7 @@ START_TEST(test_s21_create_matrix) {
     int buffer_errcode_1 = 42;
     int src_1_rows = 3;
     int src_1_cols = 3;
-    matrix_t src_1 = { NULL, 0, 0 };
+    matrix_t src_1 = {NULL, 0, 0 };
 
     buffer_errcode_1 = s21_create_matrix(src_1_rows, src_1_cols, &src_1);
 
@@ -29,15 +29,15 @@ START_TEST(test_s21_create_matrix) {
 
     // ОШИБКИ
     // Проверка на некорректные значения количества рядов и колонок
-    int correct_result_of_error = INCORRECT_MATRIX;
-    int buffer_result_for_error = 42;
+    int correct_errcode_2 = INCORRECT_MATRIX;
+    int buffer_errcode_2 = 42;
     int src_2_rows = -21;
     int src_2_cols = -21;
-    matrix_t src_2 = { NULL, 0, 0 };
+    matrix_t src_2 = {NULL, 0, 0 };
 
-    buffer_result_for_error = s21_create_matrix(src_2_rows, src_2_cols, &src_2);
+    buffer_errcode_2 = s21_create_matrix(src_2_rows, src_2_cols, &src_2);
 
-    ck_assert_int_eq(correct_result_of_error, buffer_result_for_error);
+    ck_assert_int_eq(correct_errcode_2, buffer_errcode_2);
 
     s21_remove_matrix(&src_2);
 }
@@ -180,15 +180,132 @@ START_TEST(test_s21_eq_matrix) {
 END_TEST
 
 START_TEST(test_s21_sum_matrix) {
-    // Сложение двух матриц целых чисел
-    // Сложение двух матриц дробных чисел
+    // Сложение двух матриц
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+    int src_1_rows = 2;
+    int src_1_cols = 2;
+
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_B = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
+
+    s21_create_matrix(src_1_rows, src_1_cols, &src_1_A);
+    s21_create_matrix(src_1_rows, src_1_cols, &src_1_B);
+
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = -1.5;
+    src_1_A.matrix[1][0] = -1.0;
+    src_1_A.matrix[1][1] = 1.123456;
+
+    src_1_B.matrix[0][0] = 1.0;
+    src_1_B.matrix[0][1] = 1.5;
+    src_1_B.matrix[1][0] = -1.0;
+    src_1_B.matrix[1][1] = 6.654321;
+
+    buffer_errcode_1 = s21_sum_matrix(&src_1_A, &src_1_B, &src_1_res);
+
+    ck_assert_double_eq_tol(src_1_res.matrix[0][0], 2.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], 0.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][0], -2.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][1], 7.777777, EPS);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1_A);
+    s21_remove_matrix(&src_1_B);
+    s21_remove_matrix(&src_1_res);
 
     // ОШИБКИ
     // Матрицы не совпадают по размерам
+    int correct_errcode_2 = CALC_ERROR;
+    int buffer_errcode_2 = 42;
+
+    matrix_t src_2_A = {NULL, 0, 0};
+    matrix_t src_2_B = {NULL, 0, 0};
+    matrix_t src_2_res = {NULL, 0, 0};
+
+    s21_create_matrix(2, 1, &src_2_A);
+    s21_create_matrix(1, 3, &src_2_B);
+
+    src_2_A.matrix[0][0] = 1.0;
+    src_2_A.matrix[1][0] = 1.0;
+
+    src_2_B.matrix[0][0] = 1.0;
+    src_2_B.matrix[0][1] = 1.0;
+    src_2_B.matrix[0][2] = 1.0;
+
+    buffer_errcode_2 = s21_sum_matrix(&src_2_A, &src_2_B, &src_2_res);
+
+    ck_assert_int_eq(correct_errcode_2, buffer_errcode_2);
+
+    s21_remove_matrix(&src_2_A);
+    s21_remove_matrix(&src_2_B);
+    s21_remove_matrix(&src_2_res);
 }
 END_TEST
 
 START_TEST(test_s21_sub_matrix) {
+    // Разность двух матриц
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+    int src_1_rows = 2;
+    int src_1_cols = 2;
+
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_B = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
+
+    s21_create_matrix(src_1_rows, src_1_cols, &src_1_A);
+    s21_create_matrix(src_1_rows, src_1_cols, &src_1_B);
+
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = -1.5;
+    src_1_A.matrix[1][0] = -1.0;
+    src_1_A.matrix[1][1] = 9.999999;
+
+    src_1_B.matrix[0][0] = 1.0;
+    src_1_B.matrix[0][1] = 1.5;  // FIXME
+    src_1_B.matrix[1][0] = -1.0;
+    src_1_B.matrix[1][1] = 2.222222;
+
+    buffer_errcode_1 = s21_sub_matrix(&src_1_A, &src_1_B, &src_1_res);
+
+    ck_assert_double_eq_tol(src_1_res.matrix[0][0], 0.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], 3.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][0], 0.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][1], 7.777777, EPS);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1_A);
+    s21_remove_matrix(&src_1_B);
+    s21_remove_matrix(&src_1_res);
+
+    // ОШИБКИ
+    // Матрицы не совпадают по размерам
+    int correct_errcode_2 = CALC_ERROR;
+    int buffer_errcode_2 = 42;
+
+    matrix_t src_2_A = {NULL, 0, 0};
+    matrix_t src_2_B = {NULL, 0, 0};
+    matrix_t src_2_res = {NULL, 0, 0};
+
+    s21_create_matrix(2, 1, &src_2_A);
+    s21_create_matrix(1, 3, &src_2_B);
+
+    src_2_A.matrix[0][0] = 1.0;
+    src_2_A.matrix[1][0] = 1.0;
+
+    src_2_B.matrix[0][0] = 1.0;
+    src_2_B.matrix[0][1] = 1.0;
+    src_2_B.matrix[0][2] = 1.0;
+
+    buffer_errcode_2 = s21_sub_matrix(&src_2_A, &src_2_B, &src_2_res);
+
+    ck_assert_int_eq(correct_errcode_2, buffer_errcode_2);
+
+    s21_remove_matrix(&src_2_A);
+    s21_remove_matrix(&src_2_B);
+    s21_remove_matrix(&src_2_res);
 }
 END_TEST
 
