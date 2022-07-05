@@ -31,8 +31,8 @@ int s21_get_number(void) {
  */
 void s21_print_matrix(matrix_t *A) {
     putchar('\n');
-    for (int i = 0; i < A->columns; ++i) {
-        for (int j = 0; j < A->rows; ++j) {
+    for (int i = 0; i < A->rows; ++i) {
+        for (int j = 0; j < A->columns; ++j) {
             printf("%4.f", A->matrix[i][j]);
         }
         putchar('\n');

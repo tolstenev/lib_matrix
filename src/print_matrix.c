@@ -9,15 +9,37 @@
 #define s21_get_var_name(var)  #var
 
 int main(void) {
-    matrix_t A = {NULL, 0, 0};
-    int i = 3;
-    s21_create_matrix(i, i, &A);
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_B = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
 
-    s21_print_matrix(&A);
-    s21_fill_matrix_rand(&A);
-    s21_print_matrix(&A);
+    s21_create_matrix(3, 2, &src_1_A);
+    s21_create_matrix(2, 3, &src_1_B);
 
-    s21_remove_matrix(&A);
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = 4.0;
+    src_1_A.matrix[1][0] = 2.0;
+    src_1_A.matrix[1][1] = 5.0;
+    src_1_A.matrix[2][0] = 3.0;
+    src_1_A.matrix[2][1] = 6.0;
+
+    s21_print_matrix(&src_1_A);
+
+
+    src_1_B.matrix[0][0] = 1.0;
+    src_1_B.matrix[0][1] = -1.0;
+    src_1_B.matrix[0][2] = 1.0;
+    src_1_B.matrix[1][0] = 2.0;
+    src_1_B.matrix[1][1] = 3.0;
+    src_1_B.matrix[1][2] = 4.0;
+
+    s21_print_matrix(&src_1_B);
+
+    s21_mult_matrix(&src_1_A, &src_1_B, &src_1_res);
+
+    s21_print_matrix(&src_1_res);
+
+    s21_remove_matrix(&src_1_A);
 
     return (0);
 }

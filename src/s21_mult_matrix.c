@@ -18,7 +18,25 @@
  *          2 - Ошибка вычисления.
  */
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
-    int resulting_code = 0;
+    // Объявление переменной для возвращаемого кода ошибки
+    int errcode = OK;
 
-    return (resulting_code);
+    if (s21_check_matrix(A) == INCORRECT_MATRIX ||
+        s21_check_matrix(B) == INCORRECT_MATRIX) {
+        // Код ошибки 1, если матрица А, матрица В - некорректные
+        errcode = INCORRECT_MATRIX;
+    } else if (A->rows != B->columns || A->columns != B->rows) {
+        // Код ошибки 2, если не выполняются условия умножения матриц
+        errcode = CALC_ERROR;
+    } else {
+        // Создание матрицы под результат сложения
+        s21_create_matrix(A->rows, B->columns, result);
+        // Суммирование результатов поэлементного умножения строк матрицы А
+        // на соответствующие столбцы матрицы В
+        for (int i = 0; i < result->rows; ++i)
+            for (int j = 0; j < result->columns; ++j)
+                for (int k = 0; k < A->columns; ++k)
+                    result->matrix[i][j] += A->matrix[i][k] * B->matrix[k][j];
+    }
+    return (errcode);
 }

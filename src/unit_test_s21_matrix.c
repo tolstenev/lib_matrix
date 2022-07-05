@@ -264,14 +264,14 @@ START_TEST(test_s21_sub_matrix) {
     src_1_A.matrix[1][1] = 9.999999;
 
     src_1_B.matrix[0][0] = 1.0;
-    src_1_B.matrix[0][1] = 1.5;  // FIXME
+    src_1_B.matrix[0][1] = 1.5;
     src_1_B.matrix[1][0] = -1.0;
     src_1_B.matrix[1][1] = 2.222222;
 
     buffer_errcode_1 = s21_sub_matrix(&src_1_A, &src_1_B, &src_1_res);
 
     ck_assert_double_eq_tol(src_1_res.matrix[0][0], 0.0, EPS);
-    ck_assert_double_eq_tol(src_1_res.matrix[0][1], 3.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], -3.0, EPS);
     ck_assert_double_eq_tol(src_1_res.matrix[1][0], 0.0, EPS);
     ck_assert_double_eq_tol(src_1_res.matrix[1][1], 7.777777, EPS);
     ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
@@ -310,10 +310,82 @@ START_TEST(test_s21_sub_matrix) {
 END_TEST
 
 START_TEST(test_s21_mult_number) {
+    // Умножение матрицы на число
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+    int src_1_rows = 3;
+    int src_1_cols = 3;
+    double src_1_num = 3.14159;
+
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
+
+    s21_create_matrix(src_1_rows, src_1_cols, &src_1_A);
+
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = -1.9;
+    src_1_A.matrix[0][2] = 0.0;
+    src_1_A.matrix[1][0] = 0.0000001;
+    src_1_A.matrix[1][1] = 1234567890123456.0;
+    src_1_A.matrix[1][2] = -0.0;
+
+    buffer_errcode_1 = s21_mult_number(&src_1_A, src_1_num, &src_1_res);
+
+    ck_assert_double_eq_tol(src_1_res.matrix[0][0], 3.14159, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], -5.969021, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][2], 0.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][0], 0.0000003, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][1], 3878506137932948.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][2], -0.0, EPS);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1_A);
+    s21_remove_matrix(&src_1_res);
 }
 END_TEST
 
 START_TEST(test_s21_mult_matrix) {
+    // Умножение двух матриц  // TODO[написать разносторонний тест на умножение]
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_B = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
+
+    s21_create_matrix(3, 2, &src_1_A);
+    s21_create_matrix(2, 3, &src_1_B);
+
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = 4.0;
+    src_1_A.matrix[1][0] = 2.0;
+    src_1_A.matrix[1][1] = 5.0;
+    src_1_A.matrix[2][0] = 3.0;
+    src_1_A.matrix[2][1] = 6.0;
+
+    src_1_B.matrix[0][0] = 1.0;
+    src_1_B.matrix[0][1] = -1.0;
+    src_1_B.matrix[0][2] = 1.0;
+    src_1_B.matrix[1][0] = 2.0;
+    src_1_B.matrix[1][1] = 3.0;
+    src_1_B.matrix[1][2] = 4.0;
+
+    buffer_errcode_1 = s21_mult_matrix(&src_1_A, &src_1_B, &src_1_res);
+
+    ck_assert_double_eq_tol(src_1_res.matrix[0][0], 9.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], 11.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][2], 17.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][0], 12.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][1], 13.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][2], 22.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][0], 15.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][1], 15.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][2], 27.0, EPS);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1_A);
+    s21_remove_matrix(&src_1_B);
+    s21_remove_matrix(&src_1_res);
 }
 END_TEST
 
@@ -325,9 +397,7 @@ START_TEST(test_s21_calc_complements) {
 }
 END_TEST
 
-    Suite
-*
-lib_suite_create(void) {
+Suite *lib_suite_create(void) {
     Suite * suite_s21_matrix = suite_create("Suite_of_test_s21_matrix");
     TCase *tc_core_s21_matrix = tcase_create("Core_of_test_s21_matrix");
 
