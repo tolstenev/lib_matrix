@@ -7,7 +7,6 @@
 
 #include <check.h>
 #include <string.h>
-#include <limits.h>
 #include "s21_matrix.h"
 
 START_TEST(test_s21_create_matrix) {
@@ -16,7 +15,7 @@ START_TEST(test_s21_create_matrix) {
     int buffer_errcode_1 = 42;
     int src_1_rows = 3;
     int src_1_cols = 3;
-    matrix_t src_1 = {NULL, 0, 0 };
+    matrix_t src_1 = { NULL, 0, 0 };
 
     buffer_errcode_1 = s21_create_matrix(src_1_rows, src_1_cols, &src_1);
 
@@ -33,7 +32,7 @@ START_TEST(test_s21_create_matrix) {
     int buffer_errcode_2 = 42;
     int src_2_rows = -21;
     int src_2_cols = -21;
-    matrix_t src_2 = {NULL, 0, 0 };
+    matrix_t src_2 = { NULL, 0, 0 };
 
     buffer_errcode_2 = s21_create_matrix(src_2_rows, src_2_cols, &src_2);
 
@@ -345,7 +344,7 @@ START_TEST(test_s21_mult_number) {
 END_TEST
 
 START_TEST(test_s21_mult_matrix) {
-    // Умножение двух матриц  // TODO[написать разносторонний тест на умножение]
+    // Умножение двух матриц
     int correct_errcode_1 = OK;
     int buffer_errcode_1 = 42;
 
@@ -390,10 +389,44 @@ START_TEST(test_s21_mult_matrix) {
 END_TEST
 
 START_TEST(test_s21_transpose) {
+    // Транспонирование матрицы
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
+
+    s21_create_matrix(3, 2, &src_1_A);
+
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = 4.0;
+    src_1_A.matrix[1][0] = 2.0;
+    src_1_A.matrix[1][1] = 5.0;
+    src_1_A.matrix[2][0] = 3.0;
+    src_1_A.matrix[2][1] = 6.0;
+
+    buffer_errcode_1 = s21_transpose(&src_1_A, &src_1_res);
+
+    ck_assert_double_eq_tol(src_1_res.matrix[0][0], 1.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], 2.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][2], 3.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][0], 4.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][1], 5.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][2], 6.0, EPS);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1_A);
+    s21_remove_matrix(&src_1_res);
 }
 END_TEST
 
 START_TEST(test_s21_calc_complements) {
+
+}
+END_TEST
+
+START_TEST(test_s21_inverse_matrix) {
+
 }
 END_TEST
 
@@ -409,6 +442,7 @@ Suite *lib_suite_create(void) {
     tcase_add_test(tc_core_s21_matrix, test_s21_mult_matrix);
     tcase_add_test(tc_core_s21_matrix, test_s21_transpose);
     tcase_add_test(tc_core_s21_matrix, test_s21_calc_complements);
+    tcase_add_test(tc_core_s21_matrix, test_s21_inverse_matrix);
 
     suite_add_tcase(suite_s21_matrix, tc_core_s21_matrix);
 

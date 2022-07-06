@@ -10,14 +10,23 @@
 /**
  * @brief Функция вычисляет определитель матрицы.
  * Результат вычисления записывается в result.
- * @param A
- * @param result
+ * @param A - указатель на матрицу,
+ * @param result - указатель на результат вычисления.
  * @return  0 - OK;
  *          1 - Ошибка, некорректная матрица;
  *          2 - Ошибка вычисления.
  */
 int s21_determinant(matrix_t *A, double *result) {
-    int resulting_code = 0;
+    // Объявление переменной для возвращаемого кода ошибки
+    int errcode = OK;
 
-    return (resulting_code);
-}
+    if (s21_check_matrix(A) == INCORRECT_MATRIX) {
+        // Код ошибки 1, если матрица А, матрица некорректная.
+        errcode = INCORRECT_MATRIX;
+    } else {
+        // Создание матрицы под результат транспонирования
+        s21_create_matrix(A->rows, A->columns, result);
+
+
+        return (errcode);
+    }

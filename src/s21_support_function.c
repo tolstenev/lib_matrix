@@ -56,7 +56,7 @@ void s21_print_matrix(matrix_t *A) {
  * @param A - указатель на матрицу,
  * @param value - заполняемое значение.
  */
-void s21_fill_matrix(matrix_t *A, double value) {
+void s21_fill_matrix_value(matrix_t *A, double value) {
     for (int i = 0; i < A->rows; ++i) {
         for (int j = 0; j < A->columns; ++j) {
             A->matrix[i][j] = value;

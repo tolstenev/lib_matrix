@@ -9,7 +9,7 @@
 
 /**
  * @brief Функция удаляет матрицу по указателю А.
- * @param A - указатель на матрицу
+ * @param A - указатель на матрицу.
  */
 void s21_remove_matrix(matrix_t *A) {
     if (NULL != A) {
