@@ -19,7 +19,7 @@
 #include <errno.h>
 #include <math.h>
 
-// Возвращаемые значения функции s21_eq_matrix
+// Возвращаемые значения функций, проверяющих свойства матриц
 #define SUCCESS 1
 #define FAILURE 0
 
@@ -27,7 +27,7 @@
 #define EPS 1e-07
 
 // Числовые коды ошибок работы функций
-enum {
+enum errcodes {
   OK = 0,
   INCORRECT_MATRIX = 1,
   CALC_ERROR = 2,
@@ -56,8 +56,8 @@ int s21_transpose(matrix_t *A, matrix_t *result);
 // Вспомогательные функции бибилиотеки
 void s21_print_matrix(matrix_t *A);
 void s21_halt_programm_memory_error(void);
-void s21_fill_matrix(matrix_t *A, double value);
-void s21_fill_matrix_rand(matrix_t *A);
+void s21_fill_matrix_with_value(matrix_t *A, double value);
+void s21_fill_matrix(matrix_t *A);
 int s21_get_number(void);
 int s21_check_matrix(matrix_t *m);
 
