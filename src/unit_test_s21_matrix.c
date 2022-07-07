@@ -421,11 +421,11 @@ START_TEST(test_s21_transpose) {
 END_TEST
 
 START_TEST(test_s21_calc_complements) {
-
 }
 END_TEST
 
 START_TEST(test_s21_determinant) {
+// TODO: написать свой тест на детерминант
     matrix_t A;
     double result = 0;
     s21_create_matrix(3, 3, &A);
@@ -447,7 +447,6 @@ START_TEST(test_s21_determinant) {
 END_TEST
 
 START_TEST(test_s21_inverse_matrix) {
-
 }
 END_TEST
 

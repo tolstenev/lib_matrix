@@ -62,5 +62,6 @@ int s21_get_number(void);
 int s21_check_matrix(matrix_t *m);
 int s21_is_square_matrix(matrix_t *m);
 int s21_minor_matrix(matrix_t *A, int row_skip, int col_skip, matrix_t *result);
+double s21_calc_determinant(matrix_t *A);
 
 #endif  // SRC_S21_MATRIX_H_
