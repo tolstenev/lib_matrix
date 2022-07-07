@@ -40,17 +40,6 @@ void s21_print_matrix(matrix_t *A) {
     putchar('\n');
 }
 
-///**
-// * @brief Функция выводит сообщение об ошибке памяти на экран,
-// * и записывает его в поток вывода ошибок, устанавливая соответствующее
-// * значение в errno.
-// */
-// void s21_halt_programm_memory_error(void) {
-//    errno = ENOMEM;
-//    fprintf(stderr, "Error: %s", strerror(errno));
-//    exit(0);
-//}
-
 /**
  * @brief Заполняет матрицу А значением value
  * @param A - указатель на матрицу,
@@ -87,7 +76,6 @@ int s21_check_matrix(matrix_t *m) {
                                                         : OK;
 }
 
-
 /**
  * @brief Проверяет квадратная ли матрица
  * @param m - указатель проверяемую на матрицу.
@@ -97,4 +85,57 @@ int s21_check_matrix(matrix_t *m) {
 int s21_is_square_matrix(matrix_t *m) {
     return (m->rows == m->columns) ? SUCCESS
                                    : FAILURE;
+}
+
+/**
+ * @brief Функция записывает минор матрицы А в матрицу result.
+ * @param A - указатель на матрицу,
+ * @param row_skip - индекс строки элемента, для которого находится минор матрицы,
+ * @param col_skip - индекс столбца элемента, для которого находится минор матрицы,
+ * @param result - указатель на матрицу, в которую будет записан минор.
+ * @return  0 - OK;
+ *          1 - Ошибка, некорректная матрица;
+ *          2 - Ошибка вычисления.
+ */
+int s21_minor_matrix(matrix_t *A, int row_skip, int col_skip, matrix_t *result) {
+    // Объявление переменной для возвращаемого кода ошибки
+    int errcode = OK;
+
+    if (s21_check_matrix(A) == INCORRECT_MATRIX) {
+        // Код ошибки 1, если матрица А, матрица некорректная
+        errcode = INCORRECT_MATRIX;
+    } else if (!s21_is_square_matrix(A) || A->rows < 2) {
+        // Код ошибки 2, если размеры матриц не совпадают
+        errcode = CALC_ERROR;
+    } else {
+        // Объявление переменных для обращения к строкам и столбцам минора матрицы
+        int i_minor = 0;
+        int j_minor = 0;
+        // Создание матрицы под результат вычисления
+        s21_create_matrix(A->rows - 1, A->columns - 1, result);
+
+        // Перебор строк матрицы А
+        for (int i_matrix = 0; i_matrix < A->rows; ++i_matrix) {
+            // Если рассматриваемый индекс строки и индекс минора совпадают,
+            // переход к следующей строке
+            if (i_matrix == row_skip)
+                continue;
+            // Обнуление индекса строки матрицы миноров (для последующих итераций)
+            j_minor = 0;
+            // Перебор элементов строки матрицы А
+            for (int j_matrix = 0; j_matrix < A->columns; ++j_matrix) {
+                // Если рассматриваемый индекс столбца и индекс минора совпадают,
+                // переход к следующей строке
+                if (j_matrix == col_skip)
+                    continue;
+                // Инициализация элемента минора соответствующим элементом матрицы
+                result->matrix[i_minor][j_minor] = A->matrix[i_matrix][j_matrix];
+                // Переход к следующему элементу строки минора
+                ++j_minor;
+            }
+            // Переход к следующей строке минора
+            ++i_minor;
+        }
+    }
+    return (errcode);
 }

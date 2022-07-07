@@ -33,7 +33,8 @@ SRCS		:= s21_support_function.c \
 			   s21_sub_matrix.c \
 			   s21_mult_number.c \
 			   s21_mult_matrix.c \
-			   s21_transpose.c
+			   s21_transpose.c \
+			   s21_determinant.c
 OBJS		:= $(SRCS:.c=.o)
 
 PRINT_TEST	:= print_matrix

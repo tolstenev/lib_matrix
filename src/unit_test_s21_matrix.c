@@ -425,8 +425,191 @@ START_TEST(test_s21_calc_complements) {
 }
 END_TEST
 
+START_TEST(test_s21_determinant) {
+    matrix_t A;
+    double result = 0;
+    s21_create_matrix(3, 3, &A);
+    A.matrix[0][0] = 1;
+    A.matrix[0][1] = 4;
+    A.matrix[1][0] = 2;
+    A.matrix[1][1] = 5;
+    A.matrix[2][0] = 3;
+    A.matrix[2][1] = 6;
+    A.matrix[0][2] = 7;
+    A.matrix[1][2] = 8;
+    A.matrix[2][2] = 99;
+    int res1 = s21_determinant(&A, &result);
+    int res2 = 0;
+    ck_assert_int_eq(res1, res2);
+    ck_assert_float_eq(result, -270);
+    s21_remove_matrix(&A);
+}
+END_TEST
+
 START_TEST(test_s21_inverse_matrix) {
 
+}
+END_TEST
+
+START_TEST(test_s21_minor_matrix) {
+    // Вычисление минора (0,0) матрицы 3 х 3
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
+
+    s21_create_matrix(3, 3, &src_1_A);
+
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = 2.0;
+    src_1_A.matrix[0][2] = 3.0;
+    src_1_A.matrix[1][0] = 4.0;
+    src_1_A.matrix[1][1] = 5.0;
+    src_1_A.matrix[1][2] = 6.0;
+    src_1_A.matrix[2][0] = 7.0;
+    src_1_A.matrix[2][1] = 8.0;
+    src_1_A.matrix[2][2] = 9.0;
+
+    buffer_errcode_1 = s21_minor_matrix(&src_1_A, 0, 0, &src_1_res);
+
+    ck_assert_double_eq_tol(src_1_res.matrix[0][0], 5.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], 6.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][0], 8.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][1], 9.0, EPS);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1_A);
+    s21_remove_matrix(&src_1_res);
+
+    // Вычисление минора (1,1) матрицы 3 х 3
+    int correct_errcode_2 = OK;
+    int buffer_errcode_2 = 42;
+
+    matrix_t src_2_A = {NULL, 0, 0};
+    matrix_t src_2_res = {NULL, 0, 0};
+
+    s21_create_matrix(3, 3, &src_2_A);
+
+    src_2_A.matrix[0][0] = 1.0;
+    src_2_A.matrix[0][1] = 2.0;
+    src_2_A.matrix[0][2] = 3.0;
+    src_2_A.matrix[1][0] = 4.0;
+    src_2_A.matrix[1][1] = 5.0;
+    src_2_A.matrix[1][2] = 6.0;
+    src_2_A.matrix[2][0] = 7.0;
+    src_2_A.matrix[2][1] = 8.0;
+    src_2_A.matrix[2][2] = 9.0;
+
+    buffer_errcode_2 = s21_minor_matrix(&src_2_A, 1, 1, &src_2_res);
+
+    ck_assert_double_eq_tol(src_2_res.matrix[0][0], 1.0, EPS);
+    ck_assert_double_eq_tol(src_2_res.matrix[0][1], 3.0, EPS);
+    ck_assert_double_eq_tol(src_2_res.matrix[1][0], 7.0, EPS);
+    ck_assert_double_eq_tol(src_2_res.matrix[1][1], 9.0, EPS);
+    ck_assert_int_eq(correct_errcode_2, buffer_errcode_2);
+
+    s21_remove_matrix(&src_2_A);
+    s21_remove_matrix(&src_2_res);
+
+    // Вычисление минора (2,1) матрицы 3 х 3
+    int correct_errcode_3 = OK;
+    int buffer_errcode_3 = 42;
+
+    matrix_t src_3_A = {NULL, 0, 0};
+    matrix_t src_3_res = {NULL, 0, 0};
+
+    s21_create_matrix(3, 3, &src_3_A);
+
+    src_3_A.matrix[0][0] = 1.0;
+    src_3_A.matrix[0][1] = 2.0;
+    src_3_A.matrix[0][2] = 3.0;
+    src_3_A.matrix[1][0] = 4.0;
+    src_3_A.matrix[1][1] = 5.0;
+    src_3_A.matrix[1][2] = 6.0;
+    src_3_A.matrix[2][0] = 7.0;
+    src_3_A.matrix[2][1] = 8.0;
+    src_3_A.matrix[2][2] = 9.0;
+
+    buffer_errcode_3 = s21_minor_matrix(&src_3_A, 2, 1, &src_3_res);
+
+    ck_assert_double_eq_tol(src_3_res.matrix[0][0], 1.0, EPS);
+    ck_assert_double_eq_tol(src_3_res.matrix[0][1], 3.0, EPS);
+    ck_assert_double_eq_tol(src_3_res.matrix[1][0], 4.0, EPS);
+    ck_assert_double_eq_tol(src_3_res.matrix[1][1], 6.0, EPS);
+    ck_assert_int_eq(correct_errcode_3, buffer_errcode_3);
+
+    s21_remove_matrix(&src_3_A);
+    s21_remove_matrix(&src_3_res);
+
+    // Вычисление минора (2,2) матрицы 3 х 3
+    int correct_errcode_4 = OK;
+    int buffer_errcode_4 = 42;
+
+    matrix_t src_4_A = {NULL, 0, 0};
+    matrix_t src_4_res = {NULL, 0, 0};
+
+    s21_create_matrix(3, 3, &src_4_A);
+
+    src_4_A.matrix[0][0] = 1.0;
+    src_4_A.matrix[0][1] = 2.0;
+    src_4_A.matrix[0][2] = 3.0;
+    src_4_A.matrix[1][0] = 4.0;
+    src_4_A.matrix[1][1] = 5.0;
+    src_4_A.matrix[1][2] = 6.0;
+    src_4_A.matrix[2][0] = 7.0;
+    src_4_A.matrix[2][1] = 8.0;
+    src_4_A.matrix[2][2] = 9.0;
+
+    buffer_errcode_4 = s21_minor_matrix(&src_4_A, 2, 2, &src_4_res);
+
+    ck_assert_double_eq_tol(src_4_res.matrix[0][0], 1.0, EPS);
+    ck_assert_double_eq_tol(src_4_res.matrix[0][1], 2.0, EPS);
+    ck_assert_double_eq_tol(src_4_res.matrix[1][0], 4.0, EPS);
+    ck_assert_double_eq_tol(src_4_res.matrix[1][1], 5.0, EPS);
+    ck_assert_int_eq(correct_errcode_4, buffer_errcode_4);
+
+    s21_remove_matrix(&src_4_A);
+    s21_remove_matrix(&src_4_res);
+
+    // Вычисление минора (1,1) матрицы 2 х 2
+    int correct_errcode_5 = OK;
+    int buffer_errcode_5 = 42;
+
+    matrix_t src_5_A = {NULL, 0, 0};
+    matrix_t src_5_res = {NULL, 0, 0};
+
+    s21_create_matrix(2, 2, &src_5_A);
+
+    src_5_A.matrix[0][0] = 1.0;
+    src_5_A.matrix[0][1] = 2.0;
+    src_5_A.matrix[1][0] = 3.0;
+    src_5_A.matrix[1][1] = 4.0;
+
+    buffer_errcode_5 = s21_minor_matrix(&src_5_A, 1, 1, &src_5_res);
+
+    ck_assert_double_eq_tol(src_5_res.matrix[0][0], 1.0, EPS);
+    ck_assert_int_eq(correct_errcode_5, buffer_errcode_5);
+
+    s21_remove_matrix(&src_5_A);
+    s21_remove_matrix(&src_5_res);
+
+    // ОШИБКИ
+    // Вычисление минора матрицы 1 х 1
+    int correct_errcode_6 = CALC_ERROR;
+    int buffer_errcode_6 = 42;
+
+    matrix_t src_6_A = {NULL, 0, 0};
+    matrix_t src_6_res = {NULL, 0, 0};
+
+    s21_create_matrix(1, 2, &src_6_A);
+
+    buffer_errcode_6 = s21_minor_matrix(&src_6_A, 0, 0, &src_6_res);
+
+    ck_assert_int_eq(correct_errcode_6, buffer_errcode_6);
+
+    s21_remove_matrix(&src_6_A);
+    s21_remove_matrix(&src_6_res);
 }
 END_TEST
 
@@ -443,6 +626,10 @@ Suite *lib_suite_create(void) {
     tcase_add_test(tc_core_s21_matrix, test_s21_transpose);
     tcase_add_test(tc_core_s21_matrix, test_s21_calc_complements);
     tcase_add_test(tc_core_s21_matrix, test_s21_inverse_matrix);
+    tcase_add_test(tc_core_s21_matrix, test_s21_determinant);
+
+
+    tcase_add_test(tc_core_s21_matrix, test_s21_minor_matrix);
 
     suite_add_tcase(suite_s21_matrix, tc_core_s21_matrix);
 

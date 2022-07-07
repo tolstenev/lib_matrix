@@ -27,6 +27,6 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
         // Создание матрицы под результат транспонирования
         s21_create_matrix(A->rows, A->columns, result);
 
-
         return (errcode);
     }
+}
