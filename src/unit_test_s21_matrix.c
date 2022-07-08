@@ -421,6 +421,40 @@ START_TEST(test_s21_transpose) {
 END_TEST
 
 START_TEST(test_s21_calc_complements) {
+    // Вычисление матрицы алгебраических дополнений для матрицы 3-го порядка
+//    int correct_errcode_1 = OK;
+//    int buffer_errcode_1 = 42;
+//
+//    matrix_t src_1_A = {NULL, 0, 0};
+//    matrix_t src_1_res = {NULL, 0, 0};
+//
+//    s21_create_matrix(3, 3, &src_1_A);
+//
+//    src_1_A.matrix[0][0] = 1.0;
+//    src_1_A.matrix[0][1] = 2.0;
+//    src_1_A.matrix[0][2] = 3.0;
+//    src_1_A.matrix[1][0] = 0.0;
+//    src_1_A.matrix[1][1] = 4.0;
+//    src_1_A.matrix[1][2] = 2.0;
+//    src_1_A.matrix[2][0] = 5.0;
+//    src_1_A.matrix[2][1] = 2.0;
+//    src_1_A.matrix[2][2] = 1.0;
+//
+//    buffer_errcode_1 = s21_calc_complements(&src_1_A, &src_1_res);
+//
+//    ck_assert_double_eq_tol(src_2_res.matrix[0][0], 0.0, EPS);
+//    ck_assert_double_eq_tol(src_2_res.matrix[0][1], 10.0, EPS);
+//    ck_assert_double_eq_tol(src_2_res.matrix[0][2], -20.0, EPS);
+//    ck_assert_double_eq_tol(src_2_res.matrix[1][0], 4.0, EPS);
+//    ck_assert_double_eq_tol(src_2_res.matrix[1][1], -14.0, EPS);
+//    ck_assert_double_eq_tol(src_2_res.matrix[1][2], 8.0, EPS);
+//    ck_assert_double_eq_tol(src_2_res.matrix[2][0], -8.0, EPS);
+//    ck_assert_double_eq_tol(src_2_res.matrix[2][1], -2.0, EPS);
+//    ck_assert_double_eq_tol(src_2_res.matrix[2][2], 4.0, EPS);
+//    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+//
+//    s21_remove_matrix(&src_1_A);
+//    s21_remove_matrix(&src_1_res);
 }
 END_TEST
 
@@ -511,8 +545,51 @@ START_TEST(test_s21_inverse_matrix) {
 }
 END_TEST
 
-START_TEST(test_s21_minor_matrix) {
-    // Вычисление минора (0,0) матрицы 3 х 3
+START_TEST(test_s21_calc_minor) {
+    // Построение матрицы миноров для матрицы 3-го порядка
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
+
+    s21_create_matrix(3, 3, &src_1_A);
+
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = 2.0;
+    src_1_A.matrix[0][2] = 3.0;
+    src_1_A.matrix[1][0] = 0.0;
+    src_1_A.matrix[1][1] = 4.0;
+    src_1_A.matrix[1][2] = 2.0;
+    src_1_A.matrix[2][0] = 5.0;
+    src_1_A.matrix[2][1] = 2.0;
+    src_1_A.matrix[2][2] = 1.0;
+
+    src_1_res.matrix[0][0] = s21_calc_minor(&src_1_A, 0, 0);
+    src_1_res.matrix[0][1] = s21_calc_minor(&src_1_A, 0, 1);
+    src_1_res.matrix[0][2] = s21_calc_minor(&src_1_A, 0, 2);
+    src_1_res.matrix[1][0] = s21_calc_minor(&src_1_A, 1, 0);
+    src_1_res.matrix[1][1] = s21_calc_minor(&src_1_A, 1, 1);
+    src_1_res.matrix[1][2] = s21_calc_minor(&src_1_A, 1, 2);
+    src_1_res.matrix[2][0] = s21_calc_minor(&src_1_A, 2, 0);
+    src_1_res.matrix[2][1] = s21_calc_minor(&src_1_A, 2, 1);
+    src_1_res.matrix[2][2] = s21_calc_minor(&src_1_A, 2, 2);
+
+
+    ck_assert_double_eq_tol(src_1_res.matrix[0][0], 0.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], -10.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][2], -20.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][0], -4.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][1], -14.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][2], -8.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][0], -8.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][1], 2.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][2], 4.0, EPS);
+
+    s21_remove_matrix(&src_1_A);
+    s21_remove_matrix(&src_1_res);
+}
+END_TEST
+
+START_TEST(test_s21_matrix_for_minor) {
+    // Получение матрицы с вычеркнутым рядом и столбцом (0,0) матрицы 3 х 3
     int correct_errcode_1 = OK;
     int buffer_errcode_1 = 42;
 
@@ -531,7 +608,7 @@ START_TEST(test_s21_minor_matrix) {
     src_1_A.matrix[2][1] = 8.0;
     src_1_A.matrix[2][2] = 9.0;
 
-    buffer_errcode_1 = s21_minor_matrix(&src_1_A, 0, 0, &src_1_res);
+    buffer_errcode_1 = s21_matrix_for_minor(&src_1_A, 0, 0, &src_1_res);
 
     ck_assert_double_eq_tol(src_1_res.matrix[0][0], 5.0, EPS);
     ck_assert_double_eq_tol(src_1_res.matrix[0][1], 6.0, EPS);
@@ -542,7 +619,7 @@ START_TEST(test_s21_minor_matrix) {
     s21_remove_matrix(&src_1_A);
     s21_remove_matrix(&src_1_res);
 
-    // Вычисление минора (1,1) матрицы 3 х 3
+    // Получение матрицы с вычеркнутым рядом и столбцом (1,1) матрицы 3 х 3
     int correct_errcode_2 = OK;
     int buffer_errcode_2 = 42;
 
@@ -561,7 +638,7 @@ START_TEST(test_s21_minor_matrix) {
     src_2_A.matrix[2][1] = 8.0;
     src_2_A.matrix[2][2] = 9.0;
 
-    buffer_errcode_2 = s21_minor_matrix(&src_2_A, 1, 1, &src_2_res);
+    buffer_errcode_2 = s21_matrix_for_minor(&src_2_A, 1, 1, &src_2_res);
 
     ck_assert_double_eq_tol(src_2_res.matrix[0][0], 1.0, EPS);
     ck_assert_double_eq_tol(src_2_res.matrix[0][1], 3.0, EPS);
@@ -572,7 +649,7 @@ START_TEST(test_s21_minor_matrix) {
     s21_remove_matrix(&src_2_A);
     s21_remove_matrix(&src_2_res);
 
-    // Вычисление минора (2,1) матрицы 3 х 3
+    // Получение матрицы с вычеркнутым рядом и столбцом (2,1) матрицы 3 х 3
     int correct_errcode_3 = OK;
     int buffer_errcode_3 = 42;
 
@@ -591,7 +668,7 @@ START_TEST(test_s21_minor_matrix) {
     src_3_A.matrix[2][1] = 8.0;
     src_3_A.matrix[2][2] = 9.0;
 
-    buffer_errcode_3 = s21_minor_matrix(&src_3_A, 2, 1, &src_3_res);
+    buffer_errcode_3 = s21_matrix_for_minor(&src_3_A, 2, 1, &src_3_res);
 
     ck_assert_double_eq_tol(src_3_res.matrix[0][0], 1.0, EPS);
     ck_assert_double_eq_tol(src_3_res.matrix[0][1], 3.0, EPS);
@@ -602,7 +679,7 @@ START_TEST(test_s21_minor_matrix) {
     s21_remove_matrix(&src_3_A);
     s21_remove_matrix(&src_3_res);
 
-    // Вычисление минора (2,2) матрицы 3 х 3
+    // Получение матрицы с вычеркнутым рядом и столбцом (2,2) матрицы 3 х 3
     int correct_errcode_4 = OK;
     int buffer_errcode_4 = 42;
 
@@ -621,7 +698,7 @@ START_TEST(test_s21_minor_matrix) {
     src_4_A.matrix[2][1] = 8.0;
     src_4_A.matrix[2][2] = 9.0;
 
-    buffer_errcode_4 = s21_minor_matrix(&src_4_A, 2, 2, &src_4_res);
+    buffer_errcode_4 = s21_matrix_for_minor(&src_4_A, 2, 2, &src_4_res);
 
     ck_assert_double_eq_tol(src_4_res.matrix[0][0], 1.0, EPS);
     ck_assert_double_eq_tol(src_4_res.matrix[0][1], 2.0, EPS);
@@ -632,7 +709,7 @@ START_TEST(test_s21_minor_matrix) {
     s21_remove_matrix(&src_4_A);
     s21_remove_matrix(&src_4_res);
 
-    // Вычисление минора (1,1) матрицы 2 х 2
+    // Получение матрицы с вычеркнутым рядом и столбцом (1,1) матрицы 2 х 2
     int correct_errcode_5 = OK;
     int buffer_errcode_5 = 42;
 
@@ -646,7 +723,7 @@ START_TEST(test_s21_minor_matrix) {
     src_5_A.matrix[1][0] = 3.0;
     src_5_A.matrix[1][1] = 4.0;
 
-    buffer_errcode_5 = s21_minor_matrix(&src_5_A, 1, 1, &src_5_res);
+    buffer_errcode_5 = s21_matrix_for_minor(&src_5_A, 1, 1, &src_5_res);
 
     ck_assert_double_eq_tol(src_5_res.matrix[0][0], 1.0, EPS);
     ck_assert_int_eq(correct_errcode_5, buffer_errcode_5);
@@ -655,7 +732,7 @@ START_TEST(test_s21_minor_matrix) {
     s21_remove_matrix(&src_5_res);
 
     // ОШИБКИ
-    // Вычисление минора матрицы 1 х 1
+    // Получение матрицы с вычеркнутым рядом и столбцом матрицы 1 х 1
     int correct_errcode_6 = CALC_ERROR;
     int buffer_errcode_6 = 42;
 
@@ -664,7 +741,7 @@ START_TEST(test_s21_minor_matrix) {
 
     s21_create_matrix(1, 2, &src_6_A);
 
-    buffer_errcode_6 = s21_minor_matrix(&src_6_A, 0, 0, &src_6_res);
+    buffer_errcode_6 = s21_matrix_for_minor(&src_6_A, 0, 0, &src_6_res);
 
     ck_assert_int_eq(correct_errcode_6, buffer_errcode_6);
 
@@ -689,7 +766,7 @@ Suite *lib_suite_create(void) {
     tcase_add_test(tc_core_s21_matrix, test_s21_determinant);
 
 
-    tcase_add_test(tc_core_s21_matrix, test_s21_minor_matrix);
+    tcase_add_test(tc_core_s21_matrix, test_s21_matrix_for_minor);
 
     suite_add_tcase(suite_s21_matrix, tc_core_s21_matrix);
 

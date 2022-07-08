@@ -26,11 +26,14 @@ int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
         errcode = INCORRECT_MATRIX;
     } else {
         // Создание матрицы под результат сложения
-        s21_create_matrix(A->rows, A->columns, result);
-        // Поэлементное умножение матрицы А на число number
-        for (int i = 0; i < result->rows; ++i)
-            for (int j = 0; j < result->columns; ++j)
-                result->matrix[i][j] = A->matrix[i][j] * number;
+        errcode = s21_create_matrix(A->rows, A->columns, result);
+
+        if (errcode == OK) {
+            // Поэлементное умножение матрицы А на число number
+            for (int i = 0; i < result->rows; ++i)
+                for (int j = 0; j < result->columns; ++j)
+                    result->matrix[i][j] = A->matrix[i][j] * number;
+        }
     }
     return (errcode);
 }

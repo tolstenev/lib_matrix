@@ -39,7 +39,7 @@ int s21_determinant(matrix_t *A, double *result) {
  * @return Определитель матрицы.
  */
 double s21_calc_determinant(matrix_t *A) {
-    // Объявление переменной для результата вычисления
+    // Объявление переменной для результата вычисления определителя
     double result = 0.0;
 
     if (A->rows == 1) {
@@ -53,15 +53,16 @@ double s21_calc_determinant(matrix_t *A) {
                  A->matrix[0][1] * A->matrix[1][0];
     } else {
         // Определитель матрицы n-го порядка вычисляется
-        // по рекурсивной формуле: сумма от 0 до j
-        // (-1)^(i + j) * a(0, j) * M(0, j)
+        // по рекурентной формуле: сумма от 0 до j
+        // (-1)^(0 + j) * a(0, j) * M(0, j)
+        // (ноль в произведении означает индекс первой строки i = 0)
         for (int j = 0; j < A->rows; ++j) {
-            matrix_t minor = {NULL, 0, 0};
+            matrix_t matrix_for_minor = {NULL, 0, 0};
 
-            if (s21_minor_matrix(A, 0, j, &minor) == OK) {
+            if (s21_matrix_for_minor(A, 0, j, &matrix_for_minor) == OK) {
                 int sign = ((0 + j) % 2) ? -1 : 1;
-                result += sign * A->matrix[0][j] * s21_calc_determinant(&minor);
-                s21_remove_matrix(&minor);
+                result += sign * A->matrix[0][j] * s21_calc_determinant(&matrix_for_minor);
+                s21_remove_matrix(&matrix_for_minor);
             }
         }
     }

@@ -25,11 +25,14 @@ int s21_transpose(matrix_t *A, matrix_t *result) {
         errcode = INCORRECT_MATRIX;
     } else {
         // Создание матрицы под результат транспонирования
-        s21_create_matrix(A->columns, A->rows, result);
-        // Поэлементное умножение матрицы А на число number
-        for (int i = 0; i < result->rows; ++i)
-            for (int j = 0; j < result->columns; ++j)
-                result->matrix[i][j] = A->matrix[j][i];
+        errcode = s21_create_matrix(A->columns, A->rows, result);
+
+        if (errcode == OK) {
+            // Поэлементное умножение матрицы А на число number
+            for (int i = 0; i < result->rows; ++i)
+                for (int j = 0; j < result->columns; ++j)
+                    result->matrix[i][j] = A->matrix[j][i];
+        }
     }
     return (errcode);
 }

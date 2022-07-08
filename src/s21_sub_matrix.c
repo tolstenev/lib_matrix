@@ -30,11 +30,14 @@ int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
         errcode = CALC_ERROR;
     } else {
         // Создание матрицы под результат вычитания
-        s21_create_matrix(A->rows, A->columns, result);
-        // Поэлементное вычитание матрицы В из А
-        for (int i = 0; i < result->rows; ++i)
-            for (int j = 0; j < result->columns; ++j)
-                result->matrix[i][j] = A->matrix[i][j] - B->matrix[i][j];
+        errcode = s21_create_matrix(A->rows, A->columns, result);
+
+        if (errcode == OK) {
+            // Поэлементное вычитание матрицы В из А
+            for (int i = 0; i < result->rows; ++i)
+                for (int j = 0; j < result->columns; ++j)
+                    result->matrix[i][j] = A->matrix[i][j] - B->matrix[i][j];
+        }
     }
     return (errcode);
 }

@@ -49,7 +49,7 @@ int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
 int s21_mult_number(matrix_t *A, double number, matrix_t *result);
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
 int s21_transpose(matrix_t *A, matrix_t *result);
-// int s21_calc_complements(matrix_t *A, matrix_t *result);
+int s21_calc_complements(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
 // int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
@@ -59,9 +59,10 @@ void s21_halt_programm_memory_error(void);
 void s21_fill_matrix_with_value(matrix_t *A, double value);
 void s21_fill_matrix(matrix_t *A);
 int s21_get_number(void);
-int s21_check_matrix(matrix_t *m);
-int s21_is_square_matrix(matrix_t *m);
-int s21_minor_matrix(matrix_t *A, int row_skip, int col_skip, matrix_t *result);
+int s21_check_matrix(matrix_t *A);
+int s21_is_square_matrix(matrix_t *A);
+int s21_matrix_for_minor(matrix_t *A, int row_skip, int col_skip, matrix_t *result);
+double s21_calc_minor(matrix_t *A, int row_skip, int col_skip);
 double s21_calc_determinant(matrix_t *A);
 
 #endif  // SRC_S21_MATRIX_H_
