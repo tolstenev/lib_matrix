@@ -24,8 +24,18 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
         // Код ошибки 1, если матрица А, матрица некорректная.
         errcode = INCORRECT_MATRIX;
     } else {
-        s21_create_matrix(A->rows, A->columns, result);
+        // Создание матрицы под результат вычисления
+        errcode = s21_create_matrix(A->rows, A->columns, result);
 
+        if (errcode == OK) {
+            // Перебор элементов матрицы А
+            for (int i = 0; i < A->rows; ++i) {
+                for (int j = 0; j < A->columns; ++j) {
+                    // Инициализация элементов матрицы алгебраических дополнений
+                    result->matrix[i][j] = s21_calc_one_complement(A, i, j);
+                }
+            }
+        }
     }
     return (errcode);
 }
@@ -121,6 +131,8 @@ double s21_calc_minor(matrix_t *A, int row_skip, int col_skip) {
  * @return Значение минора типа double
  */
 double s21_calc_one_complement(matrix_t *A, int row_skip, int col_skip) {
+    // Алгебраическим дополнением элемента a(i, j) матрицы является значение минора,
+    // умноженное на (-1)^(i + j)
     int sign = ((row_skip + col_skip) % 2) ? -1 : 1;
     return (sign * s21_calc_minor(A, row_skip, col_skip));
 }

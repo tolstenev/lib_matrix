@@ -64,5 +64,6 @@ int s21_is_square_matrix(matrix_t *A);
 int s21_matrix_for_minor(matrix_t *A, int row_skip, int col_skip, matrix_t *result);
 double s21_calc_minor(matrix_t *A, int row_skip, int col_skip);
 double s21_calc_determinant(matrix_t *A);
+double s21_calc_one_complement(matrix_t *A, int row_skip, int col_skip);
 
 #endif  // SRC_S21_MATRIX_H_

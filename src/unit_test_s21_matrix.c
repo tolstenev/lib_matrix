@@ -422,39 +422,39 @@ END_TEST
 
 START_TEST(test_s21_calc_complements) {
     // Вычисление матрицы алгебраических дополнений для матрицы 3-го порядка
-//    int correct_errcode_1 = OK;
-//    int buffer_errcode_1 = 42;
-//
-//    matrix_t src_1_A = {NULL, 0, 0};
-//    matrix_t src_1_res = {NULL, 0, 0};
-//
-//    s21_create_matrix(3, 3, &src_1_A);
-//
-//    src_1_A.matrix[0][0] = 1.0;
-//    src_1_A.matrix[0][1] = 2.0;
-//    src_1_A.matrix[0][2] = 3.0;
-//    src_1_A.matrix[1][0] = 0.0;
-//    src_1_A.matrix[1][1] = 4.0;
-//    src_1_A.matrix[1][2] = 2.0;
-//    src_1_A.matrix[2][0] = 5.0;
-//    src_1_A.matrix[2][1] = 2.0;
-//    src_1_A.matrix[2][2] = 1.0;
-//
-//    buffer_errcode_1 = s21_calc_complements(&src_1_A, &src_1_res);
-//
-//    ck_assert_double_eq_tol(src_2_res.matrix[0][0], 0.0, EPS);
-//    ck_assert_double_eq_tol(src_2_res.matrix[0][1], 10.0, EPS);
-//    ck_assert_double_eq_tol(src_2_res.matrix[0][2], -20.0, EPS);
-//    ck_assert_double_eq_tol(src_2_res.matrix[1][0], 4.0, EPS);
-//    ck_assert_double_eq_tol(src_2_res.matrix[1][1], -14.0, EPS);
-//    ck_assert_double_eq_tol(src_2_res.matrix[1][2], 8.0, EPS);
-//    ck_assert_double_eq_tol(src_2_res.matrix[2][0], -8.0, EPS);
-//    ck_assert_double_eq_tol(src_2_res.matrix[2][1], -2.0, EPS);
-//    ck_assert_double_eq_tol(src_2_res.matrix[2][2], 4.0, EPS);
-//    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
-//
-//    s21_remove_matrix(&src_1_A);
-//    s21_remove_matrix(&src_1_res);
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+
+    matrix_t src_1_A = {NULL, 0, 0};
+    matrix_t src_1_res = {NULL, 0, 0};
+
+    s21_create_matrix(3, 3, &src_1_A);
+
+    src_1_A.matrix[0][0] = 1.0;
+    src_1_A.matrix[0][1] = 2.0;
+    src_1_A.matrix[0][2] = 3.0;
+    src_1_A.matrix[1][0] = 0.0;
+    src_1_A.matrix[1][1] = 4.0;
+    src_1_A.matrix[1][2] = 2.0;
+    src_1_A.matrix[2][0] = 5.0;
+    src_1_A.matrix[2][1] = 2.0;
+    src_1_A.matrix[2][2] = 1.0;
+
+    buffer_errcode_1 = s21_calc_complements(&src_1_A, &src_1_res);
+
+    ck_assert_double_eq_tol(src_1_res.matrix[0][0], 0.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][1], 10.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[0][2], -20.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][0], 4.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][1], -14.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[1][2], 8.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][0], -8.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][1], -2.0, EPS);
+    ck_assert_double_eq_tol(src_1_res.matrix[2][2], 4.0, EPS);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1_A);
+    s21_remove_matrix(&src_1_res);
 }
 END_TEST
 
