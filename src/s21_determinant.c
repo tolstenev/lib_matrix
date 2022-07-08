@@ -8,45 +8,59 @@
 #include "s21_matrix.h"
 
 /**
- * @brief Функция вычисляет определитель матрицы.
- * Результат вычисления записывается в result.
+ * @brief Функция записывает результат вычисления
+ * определителя матрицы в result.
  * @param A - указатель на матрицу,
- * @param result - указатель на результат вычисления.
+ * @param result - указатель на полученный определитель.
  * @return  0 - OK;
  *          1 - Ошибка, некорректная матрица;
  *          2 - Ошибка вычисления.
  */
-// TODO: написать везде комментарии
 int s21_determinant(matrix_t *A, double *result) {
+    // Объявление переменной для возвращаемого кода ошибки
     int errcode = OK;
 
     if (s21_check_matrix(A) == INCORRECT_MATRIX) {
+        // Код ошибки 1, если матрица А, матрица некорректная
         errcode = INCORRECT_MATRIX;
     } else if (!s21_is_square_matrix(A)) {
+        // Код ошибки 2, если матрица не является квадратной
         errcode = CALC_ERROR;
     } else {
+        // Вычисление детерминанта вспомогательной функцией
         *result = s21_calc_determinant(A);
     }
     return (errcode);
 }
 
+/**
+ * @brief Вычисляет опеределитель матрицы.
+ * @param A - указатель на матрицу.
+ * @return Определитель матрицы.
+ */
 double s21_calc_determinant(matrix_t *A) {
+    // Объявление переменной для результата вычисления
     double result = 0.0;
 
     if (A->rows == 1) {
+        // Определитель матрицы 1-го порядка равен единственному
+        // элементу этой матрицы
         result = A->matrix[0][0];
     } else if (A->rows == 2) {
+        // Определитель матрицы 2-го порядка равен разнице
+        // произведений главной и побочной диагоналей матрицы
         result = A->matrix[0][0] * A->matrix[1][1] -
-            A->matrix[0][1] * A->matrix[1][0];
+                 A->matrix[0][1] * A->matrix[1][0];
     } else {
+        // Определитель матрицы n-го порядка вычисляется
+        // по рекурсивной формуле: сумма от 0 до j
+        // (-1)^(i + j) * a(0, j) * M(0, j)
         for (int j = 0; j < A->rows; ++j) {
-            int errcode = OK;
-            int sign = ((0 + j) % 2) ? -1 : 1;
             matrix_t minor = {NULL, 0, 0};
 
-            errcode = s21_minor_matrix(A, 0, j, &minor);
-            if (errcode == OK) {
-                result += sign * s21_calc_determinant(&minor) * A->matrix[0][j];
+            if (s21_minor_matrix(A, 0, j, &minor) == OK) {
+                int sign = ((0 + j) % 2) ? -1 : 1;
+                result += sign * A->matrix[0][j] * s21_calc_determinant(&minor);
                 s21_remove_matrix(&minor);
             }
         }

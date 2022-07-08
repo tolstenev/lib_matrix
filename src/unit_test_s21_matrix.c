@@ -425,24 +425,85 @@ START_TEST(test_s21_calc_complements) {
 END_TEST
 
 START_TEST(test_s21_determinant) {
-// TODO: написать свой тест на детерминант
-    matrix_t A;
-    double result = 0;
-    s21_create_matrix(3, 3, &A);
-    A.matrix[0][0] = 1;
-    A.matrix[0][1] = 4;
-    A.matrix[1][0] = 2;
-    A.matrix[1][1] = 5;
-    A.matrix[2][0] = 3;
-    A.matrix[2][1] = 6;
-    A.matrix[0][2] = 7;
-    A.matrix[1][2] = 8;
-    A.matrix[2][2] = 99;
-    int res1 = s21_determinant(&A, &result);
-    int res2 = 0;
-    ck_assert_int_eq(res1, res2);
-    ck_assert_float_eq(result, -270);
-    s21_remove_matrix(&A);
+    // Детерминат матрицы 1-го порядка
+    int correct_errcode_1 = OK;
+    int buffer_errcode_1 = 42;
+    matrix_t src_1_A = {NULL, 0, 0};
+    double src_1_res = 0.0;
+
+    s21_create_matrix(1, 1, &src_1_A);
+
+    src_1_A.matrix[0][0] = 23.42;
+
+    buffer_errcode_1 = s21_determinant(&src_1_A, &src_1_res);
+
+    ck_assert_double_eq_tol(src_1_res, 23.42, EPS);
+    ck_assert_int_eq(correct_errcode_1, buffer_errcode_1);
+
+    s21_remove_matrix(&src_1_A);
+
+    // Детерминат матрицы 2-го порядка
+    int correct_errcode_2 = OK;
+    int buffer_errcode_2 = 42;
+    matrix_t src_2_A = {NULL, 0, 0};
+    double src_2_res = 0.0;
+
+    s21_create_matrix(2, 2, &src_2_A);
+
+    src_2_A.matrix[0][0] = 4.0;
+    src_2_A.matrix[0][1] = 8.0;
+    src_2_A.matrix[1][0] = 15.0;
+    src_2_A.matrix[1][1] = 16.0;
+
+    buffer_errcode_2 = s21_determinant(&src_2_A, &src_2_res);
+
+    ck_assert_double_eq_tol(src_2_res, -56, EPS);
+    ck_assert_int_eq(correct_errcode_2, buffer_errcode_2);
+
+    s21_remove_matrix(&src_2_A);
+
+    // Детерминат матрицы 3-го порядка
+    int correct_errcode_3 = OK;
+    int buffer_errcode_3 = 42;
+    matrix_t src_3_A = {NULL, 0, 0};
+    double src_3_res = 0.0;
+
+    s21_create_matrix(3, 3, &src_3_A);
+
+    src_3_A.matrix[0][0] = 0.123;
+    src_3_A.matrix[0][1] = 5.21;
+    src_3_A.matrix[0][2] = 9.515;
+    src_3_A.matrix[1][0] = 4.815;
+    src_3_A.matrix[1][1] = 42.0;
+    src_3_A.matrix[1][2] = 23.42;
+    src_3_A.matrix[2][0] = 0.99;
+    src_3_A.matrix[2][1] = 710;
+    src_3_A.matrix[2][2] = 21.0;
+
+    buffer_errcode_3 = s21_determinant(&src_3_A, &src_3_res);
+
+    ck_assert_double_eq_tol(src_3_res, 29790.027318, EPS);
+    ck_assert_int_eq(correct_errcode_3, buffer_errcode_3);
+
+    s21_remove_matrix(&src_3_A);
+
+    // ОШИБКИ
+    // Детерминат неквадратной матрицы
+    int correct_errcode_4 = CALC_ERROR;
+    int buffer_errcode_4 = 21;
+    matrix_t src_4_A = {NULL, 0, 0};
+    double src_4_res = 0.0;
+
+    s21_create_matrix(1, 2, &src_4_A);
+
+    src_4_A.matrix[0][0] = 23;
+    src_4_A.matrix[0][1] = 42;
+
+    buffer_errcode_4 = s21_determinant(&src_4_A, &src_4_res);
+
+    ck_assert_int_eq(correct_errcode_4, buffer_errcode_4);
+
+    s21_remove_matrix(&src_4_A);
 }
 END_TEST
 
