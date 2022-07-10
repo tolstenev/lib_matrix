@@ -18,15 +18,15 @@ int main(void) {
 
     s21_create_matrix(3, 3, &src_1_A);
 
-    src_1_A.matrix[0][0] = 2.75;
-    src_1_A.matrix[0][1] = 78.0;
-    src_1_A.matrix[0][2] = 9.0;
+    src_1_A.matrix[0][0] = 2.0;
+    src_1_A.matrix[0][1] = 5.0;
+    src_1_A.matrix[0][2] = 7.0;
     src_1_A.matrix[1][0] = 6.0;
-    src_1_A.matrix[1][1] = 5.0;
-    src_1_A.matrix[1][2] = 2.0;
-    src_1_A.matrix[2][0] = 189.0;
-    src_1_A.matrix[2][1] = 15.0;
-    src_1_A.matrix[2][2] = 35.0;
+    src_1_A.matrix[1][1] = 3.0;
+    src_1_A.matrix[1][2] = 4.0;
+    src_1_A.matrix[2][0] = 5.0;
+    src_1_A.matrix[2][1] = -2.0;
+    src_1_A.matrix[2][2] = -3.0;
 
     s21_print_matrix(&src_1_A);
 
@@ -34,8 +34,8 @@ int main(void) {
 
     printf("\ndeteterminant is %.2f\n\n", src_1_res);
 
-    printf("correct_errcode_1: %d\n", correct_errcode_1);
-    printf("buffer_errcode_1: %d\n", buffer_errcode_1);
+//    printf("correct_errcode_1: %d\n", correct_errcode_1);
+//    printf("buffer_errcode_1: %d\n", buffer_errcode_1);
 
     s21_remove_matrix(&src_1_A);
 

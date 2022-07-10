@@ -35,7 +35,8 @@ SRCS		:= s21_support_function.c \
 			   s21_mult_matrix.c \
 			   s21_transpose.c \
 			   s21_determinant.c \
-			   s21_calc_complements.c
+			   s21_calc_complements.c \
+			   s21_inverse_matrix.c
 OBJS		:= $(SRCS:.c=.o)
 
 PRINT_TEST	:= print_matrix
@@ -92,6 +93,9 @@ check: $(NAME)
 		@echo -------------------MEMORY_LEAKS-------------------
 		$(CC) -g $(SRC_TEST) $(NAME) $(CHECK_FLAGS) -o $(TEST)
 		CK_FORK=no leaks --atExit -- ./$(TEST)
+
+open: gcov_report
+		open ./report/index.html
 
 check_valgrind: $(NAME)
 		@clear

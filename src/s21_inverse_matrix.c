@@ -17,16 +17,19 @@
  *          2 - Ошибка вычисления.
  */
 int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
-    // Объявление переменной для возвращаемого кода ошибки
-    int errcode = OK;
+    double det = 0.0;
+    int errcode = s21_determinant(A, &det);
 
-    if (s21_check_matrix(A) == INCORRECT_MATRIX) {
-        // Код ошибки 1, если матрица А, матрица некорректная.
-        errcode = INCORRECT_MATRIX;
-    } else {
-        // Создание матрицы под результат транспонирования
-        s21_create_matrix(A->rows, A->columns, result);
+    if (errcode == OK && det != 0.0) {
+        matrix_t tmp1 = {NULL, 0, 0};
+        matrix_t tmp2 = {NULL, 0, 0};
 
-        return (errcode);
+        s21_calc_complements(A, &tmp1);
+        s21_transpose(&tmp1, &tmp2);
+        s21_mult_number(&tmp2, 1.0 / det, result);
+
+        s21_remove_matrix(&tmp1);
+        s21_remove_matrix(&tmp2);
     }
+    return (errcode);
 }

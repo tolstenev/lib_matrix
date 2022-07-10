@@ -31,7 +31,7 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
         result->matrix = calloc(rows, sizeof(double *));
 
         if (NULL == result->matrix) {
-            // Код ошибки 1, если память матрицы не была выделена
+            // Код ошибки 1, если память для матрицы не была выделена
             errcode = INCORRECT_MATRIX;
         } else {
             // Инициализация указателей на строки матрицы

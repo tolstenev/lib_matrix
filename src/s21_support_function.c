@@ -72,7 +72,7 @@ void s21_fill_matrix(matrix_t *A) {
  *          1 - Ошибка, некорректная матрица;
  */
 int s21_check_matrix(matrix_t *A) {
-    return (NULL == A || A->rows < 1 || A->columns < 1) ? INCORRECT_MATRIX
+    return (NULL == A/* || A->rows < 1 || A->columns < 1*/) ? INCORRECT_MATRIX
                                                         : OK;
 }
 
