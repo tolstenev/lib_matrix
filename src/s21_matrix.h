@@ -60,10 +60,4 @@ double s21_calc_minor(matrix_t *A, int row_skip, int col_skip);
 double s21_calc_determinant(matrix_t *A);
 double s21_calc_one_complement(matrix_t *A, int row_skip, int col_skip);
 
-// Функция для вывода на экран
-void s21_print_matrix(matrix_t *A);
-void s21_fill_matrix(matrix_t *A);
-void s21_fill_matrix_with_value(matrix_t *A, double value);
-int s21_get_number(void);
-
 #endif  // SRC_S21_MATRIX_H_

@@ -39,8 +39,6 @@ SRCS		:= s21_create_matrix.c \
 			   s21_support_function.c
 OBJS		:= $(SRCS:.c=.o)
 
-PRINT_TEST	:= print_matrix
-
 TEST		:= unit_test
 SRC_TEST	:= unit_test_s21_matrix.c
 REPORT		:= GcovReport
@@ -117,8 +115,3 @@ re:
 		$(MAKE) $(NAME)
 
 .PHONY: all test check check_valgrind clean fclean re
-
-t: $(NAME)
-		@clear
-		@$(CC) $< $(PRINT_TEST).c $(NAME) -o $(PRINT_TEST)
-		@./$(PRINT_TEST)
