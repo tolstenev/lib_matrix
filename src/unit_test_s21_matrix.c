@@ -175,21 +175,6 @@ START_TEST(test_s21_eq_matrix) {
 
     s21_remove_matrix(&src_5_A);
     s21_remove_matrix(&src_5_B);
-
-    // Проверка на некорректные значения количества рядов и колонок
-    int correct_rescode_6 = FAILURE;
-    int buffer_rescode_6 = 42;
-    int src_6_rows = -21;
-    int src_6_cols = -21;
-    matrix_t src_6_A = {NULL, 0, 0};
-    matrix_t src_6_B = {NULL, 0, 0};
-
-    buffer_rescode_6 = s21_eq_matrix(&src_6_A, &src_6_B);
-
-    ck_assert_int_eq(correct_rescode_6, buffer_rescode_6);
-
-    s21_remove_matrix(&src_6_A);
-    s21_remove_matrix(&src_6_B);
 }
 END_TEST
 
@@ -248,23 +233,6 @@ START_TEST(test_s21_sum_matrix) {
     s21_remove_matrix(&src_2_A);
     s21_remove_matrix(&src_2_B);
     s21_remove_matrix(&src_2_res);
-
-    // Проверка на некорректные значения количества рядов и колонок
-    int correct_errcode_3 = INCORRECT_MATRIX;
-    int buffer_errcode_3 = 42;
-    int src_3_rows = -21;
-    int src_3_cols = -21;
-    matrix_t src_3_A = {NULL, src_3_rows, src_3_cols};
-    matrix_t src_3_B = {NULL, src_3_rows, src_3_cols};
-    matrix_t src_3_res = {NULL, 0, 0};
-
-    buffer_errcode_3 = s21_sum_matrix(&src_3_A, &src_3_B, &src_3_res);
-
-    ck_assert_int_eq(correct_errcode_3, buffer_errcode_3);
-
-    s21_remove_matrix(&src_3_A);
-    s21_remove_matrix(&src_3_B);
-    s21_remove_matrix(&src_3_res);
 }
 END_TEST
 
@@ -323,23 +291,6 @@ START_TEST(test_s21_sub_matrix) {
     s21_remove_matrix(&src_2_A);
     s21_remove_matrix(&src_2_B);
     s21_remove_matrix(&src_2_res);
-
-    // Проверка на некорректные значения количества рядов и колонок
-    int correct_errcode_3 = INCORRECT_MATRIX;
-    int buffer_errcode_3 = 42;
-    int src_3_rows = -21;
-    int src_3_cols = -21;
-    matrix_t src_3_A = {NULL, src_3_rows, src_3_cols};
-    matrix_t src_3_B = {NULL, src_3_rows, src_3_cols};
-    matrix_t src_3_res = {NULL, 0, 0};
-
-    buffer_errcode_3 = s21_sub_matrix(&src_3_A, &src_3_B, &src_3_res);
-
-    ck_assert_int_eq(correct_errcode_3, buffer_errcode_3);
-
-    s21_remove_matrix(&src_3_A);
-    s21_remove_matrix(&src_3_B);
-    s21_remove_matrix(&src_3_res);
 }
 END_TEST
 
@@ -375,23 +326,6 @@ START_TEST(test_s21_mult_number) {
 
     s21_remove_matrix(&src_1_A);
     s21_remove_matrix(&src_1_res);
-
-    // ОШИБКИ
-    // Проверка на некорректные значения количества рядов и колонок
-    int correct_errcode_2 = INCORRECT_MATRIX;
-    int buffer_errcode_2 = 42;
-    int src_2_rows = -21;
-    int src_2_cols = -21;
-    double src_2_num = 3.14159;
-    matrix_t src_2_A = {NULL, src_2_rows, src_2_cols};
-    matrix_t src_2_res = {NULL, 0, 0};
-
-    buffer_errcode_2 = s21_mult_number(&src_2_A, src_2_num, &src_2_res);
-
-    ck_assert_int_eq(correct_errcode_2, buffer_errcode_2);
-
-    s21_remove_matrix(&src_2_A);
-    s21_remove_matrix(&src_2_res);
 }
 END_TEST
 
@@ -457,23 +391,6 @@ START_TEST(test_s21_mult_matrix) {
     s21_remove_matrix(&src_2_A);
     s21_remove_matrix(&src_2_B);
     s21_remove_matrix(&src_2_res);
-
-    // Проверка на некорректные значения количества рядов и колонок
-    int correct_errcode_3 = INCORRECT_MATRIX;
-    int buffer_errcode_3 = 42;
-    int src_3_rows = -21;
-    int src_3_cols = -21;
-    matrix_t src_3_A = {NULL, src_3_rows, src_3_cols};
-    matrix_t src_3_B = {NULL, src_3_rows, src_3_cols};
-    matrix_t src_3_res = {NULL, 0, 0};
-
-    buffer_errcode_3 = s21_mult_matrix(&src_3_A, &src_3_B, &src_3_res);
-
-    ck_assert_int_eq(correct_errcode_3, buffer_errcode_3);
-
-    s21_remove_matrix(&src_3_A);
-    s21_remove_matrix(&src_3_B);
-    s21_remove_matrix(&src_3_res);
 }
 END_TEST
 
@@ -506,22 +423,6 @@ START_TEST(test_s21_transpose) {
 
     s21_remove_matrix(&src_1_A);
     s21_remove_matrix(&src_1_res);
-
-    // ОШИБКИ
-    // Проверка на некорректные значения количества рядов и колонок
-    int correct_errcode_2 = INCORRECT_MATRIX;
-    int buffer_errcode_2 = 42;
-    int src_2_rows = -21;
-    int src_2_cols = -21;
-    matrix_t src_2_A = {NULL, src_2_rows, src_2_cols};
-    matrix_t src_2_res = {NULL, 0, 0};
-
-    buffer_errcode_2 = s21_transpose(&src_2_A, &src_2_res);
-
-    ck_assert_int_eq(correct_errcode_2, buffer_errcode_2);
-
-    s21_remove_matrix(&src_2_A);
-    s21_remove_matrix(&src_2_res);
 }
 END_TEST
 
@@ -560,22 +461,6 @@ START_TEST(test_s21_calc_complements) {
 
     s21_remove_matrix(&src_1_A);
     s21_remove_matrix(&src_1_res);
-
-    // ОШИБКИ
-    // Проверка на некорректные значения количества рядов и колонок
-    int correct_errcode_2 = INCORRECT_MATRIX;
-    int buffer_errcode_2 = 42;
-    int src_2_rows = -21;
-    int src_2_cols = -21;
-    matrix_t src_2_A = {NULL, src_2_rows, src_2_cols};
-    matrix_t src_2_res = {NULL, 0, 0};
-
-    buffer_errcode_2 = s21_calc_complements(&src_2_A, &src_2_res);
-
-    ck_assert_int_eq(correct_errcode_2, buffer_errcode_2);
-
-    s21_remove_matrix(&src_2_A);
-    s21_remove_matrix(&src_2_res);
 }
 END_TEST
 
@@ -659,26 +544,10 @@ START_TEST(test_s21_determinant) {
     ck_assert_int_eq(correct_errcode_4, buffer_errcode_4);
 
     s21_remove_matrix(&src_4_A);
-
-    // Проверка на некорректные значения количества рядов и колонок
-    int correct_errcode_5 = INCORRECT_MATRIX;
-    int buffer_errcode_5 = 42;
-    int src_5_rows = -21;
-    int src_5_cols = -21;
-    matrix_t src_5_A = {NULL, src_5_rows, src_5_cols};
-    double src_5_res = 0.0;
-
-    buffer_errcode_5 = s21_determinant(&src_5_A, &src_5_res);
-
-    ck_assert_int_eq(correct_errcode_5, buffer_errcode_5);
-
-    s21_remove_matrix(&src_5_A);
 }
 END_TEST
 
 START_TEST(test_s21_inverse_matrix) {
-    // TODO(yonnarge): просмореть архитектуру проекта, убрать лишнее
-
     // Вычисление обратной матрицы для матрицы 3-го порядка
     int correct_errcode_1 = OK;
     int buffer_errcode_1 = 42;
@@ -910,7 +779,7 @@ START_TEST(test_s21_matrix_for_minor) {
     matrix_t src_6_A = {NULL, 0, 0};
     matrix_t src_6_res = {NULL, 0, 0};
 
-    s21_create_matrix(1, 2, &src_6_A);
+    s21_create_matrix(1, 1, &src_6_A);
 
     buffer_errcode_6 = s21_matrix_for_minor(&src_6_A, 0, 0, &src_6_res);
 
@@ -935,7 +804,6 @@ Suite *lib_suite_create(void) {
     tcase_add_test(tc_core_s21_matrix, test_s21_calc_complements);
     tcase_add_test(tc_core_s21_matrix, test_s21_inverse_matrix);
     tcase_add_test(tc_core_s21_matrix, test_s21_determinant);
-
 
     tcase_add_test(tc_core_s21_matrix, test_s21_matrix_for_minor);
     tcase_add_test(tc_core_s21_matrix, test_s21_calc_minor);

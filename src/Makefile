@@ -25,8 +25,7 @@ HEADER		:= s21_matrix.h
 
 CC			:= gcc
 CFLAGS		:= -std=c11 -pedantic -Wall -Werror -Wextra
-SRCS		:= s21_support_function.c \
-			   s21_create_matrix.c \
+SRCS		:= s21_create_matrix.c \
 			   s21_remove_matrix.c \
 			   s21_eq_matrix.c \
 			   s21_sum_matrix.c \
@@ -36,7 +35,8 @@ SRCS		:= s21_support_function.c \
 			   s21_transpose.c \
 			   s21_determinant.c \
 			   s21_calc_complements.c \
-			   s21_inverse_matrix.c
+			   s21_inverse_matrix.c \
+			   s21_support_function.c
 OBJS		:= $(SRCS:.c=.o)
 
 PRINT_TEST	:= print_matrix
@@ -57,6 +57,7 @@ info:
 		@echo "  gcov_report:     run unit test of library and generate gcov report"
 		@echo "  check:           check source files by 'cppcheck', 'cpplint', and looking for memory leaks by 'leaks'"
 		@echo "  check_valgrind:  looking for memory leaks by 'valgrind'"
+		@echo "  open:            open coverage gcov report in browser"
 		@echo "  clean:           remove generated files without s21_matrix.a"
 		@echo "  fclean:          remove all generated files"
 		@echo "  re:              remove all generated files and recompile library"

@@ -8,14 +8,13 @@
 #include "s21_matrix.h"
 
 /**
- * @brief Функция создаёт матрицу размером rows на columns
+ * @brief Cоздаёт матрицу размером rows на columns
  * по указателю result.
  * @param rows - количество рядов,
  * @param columns - количество колонок,
  * @param result - указатель на созданную матрицу.
  * @return  0 - OK;
- *          1 - Ошибка, некорректная матрица;
- *          2 - Ошибка вычисления.
+ *          1 - Ошибка, некорректная матрица.
  */
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
     // Объявление переменной для возвращаемого кода ошибки

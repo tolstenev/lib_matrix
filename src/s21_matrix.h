@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
 #include <math.h>
 
 // Возвращаемые значения функций, проверяющих свойства матриц
@@ -54,16 +53,17 @@ int s21_determinant(matrix_t *A, double *result);
 int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
 // Вспомогательные функции бибилиотеки
-void s21_print_matrix(matrix_t *A);
-void s21_halt_programm_memory_error(void);
-void s21_fill_matrix_with_value(matrix_t *A, double value);
-void s21_fill_matrix(matrix_t *A);
-int s21_get_number(void);
 int s21_check_matrix(matrix_t *A);
 int s21_is_square_matrix(matrix_t *A);
 int s21_matrix_for_minor(matrix_t *A, int row_skip, int col_skip, matrix_t *result);
 double s21_calc_minor(matrix_t *A, int row_skip, int col_skip);
 double s21_calc_determinant(matrix_t *A);
 double s21_calc_one_complement(matrix_t *A, int row_skip, int col_skip);
+
+// Функция для вывода на экран
+void s21_print_matrix(matrix_t *A);
+void s21_fill_matrix(matrix_t *A);
+void s21_fill_matrix_with_value(matrix_t *A, double value);
+int s21_get_number(void);
 
 #endif  // SRC_S21_MATRIX_H_

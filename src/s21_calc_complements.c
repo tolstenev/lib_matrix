@@ -8,7 +8,7 @@
 #include "s21_matrix.h"
 
 /**
- * @brief Функция вычисляет алгебраические дополнения для матрицы А.
+ * @brief Вычисляет алгебраические дополнения для матрицы А.
  * Результат вычисления записывается в матрицу result.
  * @param A - указатель на матрицу,
  * @param result - указатель на матрицу алгебраических дополнений.
@@ -21,20 +21,22 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
     int errcode = OK;
 
     if (s21_check_matrix(A) == INCORRECT_MATRIX) {
-        // Код ошибки 1, если матрица А, матрица некорректная.
+        // Код ошибки 1, если матрица А, матрица некорректная
         errcode = INCORRECT_MATRIX;
+    } else if (!s21_is_square_matrix(A) || A->rows < 2) {
+        // Код ошибки 2, если А - матрица первого порядка,
+        // или А не является квадратной матрицей
+        errcode = CALC_ERROR;
     } else {
         // Создание матрицы под результат вычисления
         errcode = s21_create_matrix(A->rows, A->columns, result);
 
         if (errcode == OK) {
             // Перебор элементов матрицы А
-            for (int i = 0; i < A->rows; ++i) {
-                for (int j = 0; j < A->columns; ++j) {
+            for (int i = 0; i < A->rows; ++i)
+                for (int j = 0; j < A->columns; ++j)
                     // Инициализация элементов матрицы алгебраических дополнений
                     result->matrix[i][j] = s21_calc_one_complement(A, i, j);
-                }
-            }
         }
     }
     return (errcode);
@@ -60,16 +62,17 @@ int s21_matrix_for_minor(matrix_t *A, int row_skip, int col_skip, matrix_t *resu
         // Код ошибки 1, если матрица А, матрица некорректная
         errcode = INCORRECT_MATRIX;
     } else if (!s21_is_square_matrix(A) || A->rows < 2) {
-        // Код ошибки 2, если размеры матриц не совпадают
+        // Код ошибки 2, если А - матрица первого порядка,
+        // или А не является квадратной матрицей
         errcode = CALC_ERROR;
     } else {
-        // Объявление переменных для обращения к строкам и столбцам минора матрицы
-        int i_minor = 0;
-        int j_minor = 0;
         // Создание матрицы под результат вычеркивания (порядок матрицы на 1 меньше)
         errcode = s21_create_matrix(A->rows - 1, A->columns - 1, result);
 
         if (errcode == OK) {
+            // Объявление переменных для обращения к строкам и столбцам минора матрицы
+            int i_minor = 0;
+            int j_minor = 0;
             // Перебор строк входящей матрицы А
             for (int i_matrix = 0; i_matrix < A->rows; ++i_matrix) {
                 // Если рассматриваемый индекс строки и индекс элемента, относительно которого

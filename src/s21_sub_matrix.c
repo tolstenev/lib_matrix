@@ -8,7 +8,7 @@
 #include "s21_matrix.h"
 
 /**
- * @brief Функция выполняет вычитание матрицы А из матрицы В.
+ * @brief Выполняет вычитание матрицы А из матрицы В.
  * Результат вычитания записывается в матрицу result.
  * @param A - указатель на матрицу (уменьшаемое),
  * @param B - указатель на матрицу (вычитаемое),
@@ -23,7 +23,7 @@ int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 
     if (s21_check_matrix(A) == INCORRECT_MATRIX ||
         s21_check_matrix(B) == INCORRECT_MATRIX) {
-        // Код ошибки 1, если матрица А, матрица В - некорректные.
+        // Код ошибки 1, если матрица А, матрица В - некорректные
         errcode = INCORRECT_MATRIX;
     } else if (A->rows != B->rows || A->columns != B->columns) {
         // Код ошибки 2, если размеры матриц не совпадают

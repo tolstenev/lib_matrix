@@ -34,8 +34,8 @@ int main(void) {
 
     printf("\ndeteterminant is %.2f\n\n", src_1_res);
 
-//    printf("correct_errcode_1: %d\n", correct_errcode_1);
-//    printf("buffer_errcode_1: %d\n", buffer_errcode_1);
+    printf("correct_errcode_1: %d\n", correct_errcode_1);
+    printf("buffer_errcode_1: %d\n", buffer_errcode_1);
 
     s21_remove_matrix(&src_1_A);
 
