@@ -64,7 +64,7 @@ s21_matrix.a: $(OBJS)
 		@clear
 		ar rcs $(NAME) $(OBJS)
 
-%.o: %.c
+%.o: %.c $(HEADER)
 		$(CC) $(CFLAGS) -c $< -o $@
 
 test: $(NAME)
