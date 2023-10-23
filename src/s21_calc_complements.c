@@ -1,8 +1,18 @@
 /*
- * Copyright (с) 2022 Student of School 21:
- * Yonn Argelia
+ * Copyright 2023 Gleb Tolstenev
+ * tolstenev.gleb@mail.ru
  *
- * yonnarge@student.21-school.ru
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 #include "s21_matrix.h"
@@ -54,7 +64,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
  *          1 - Ошибка, некорректная матрица;
  *          2 - Ошибка вычисления.
  */
-int s21_matrix_for_minor(matrix_t *A, int row_skip, int col_skip, matrix_t *result) {
+int s21_create_matrix_for_minor(matrix_t *A, int row_skip, int col_skip, matrix_t *result) {
     // Объявление переменной для возвращаемого кода ошибки
     int errcode = OK;
 
@@ -116,7 +126,7 @@ double s21_calc_minor(matrix_t *A, int row_skip, int col_skip) {
     double result = 0.0;
     matrix_t matrix_for_minor = {NULL, 0, 0};
 
-    if (s21_matrix_for_minor(A, row_skip, col_skip, &matrix_for_minor) == OK)
+    if (s21_create_matrix_for_minor(A, row_skip, col_skip, &matrix_for_minor) == OK)
         // Если матрица была успешно создана, вычисляем определитель для
         // матрицы с вычеркнутыми рядом row_skip и столбцом col_skip
         result = s21_calc_determinant(&matrix_for_minor);

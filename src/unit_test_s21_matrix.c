@@ -1,8 +1,18 @@
 /*
- * Copyright (с) 2022 Student of School 21:
- * Yonn Argelia
+ * Copyright 2023 Gleb Tolstenev
+ * tolstenev.gleb@mail.ru
  *
- * yonnarge@student.21-school.ru
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 #include <check.h>
@@ -648,7 +658,7 @@ START_TEST(test_s21_matrix_for_minor) {
     src_1_A.matrix[2][1] = 8.0;
     src_1_A.matrix[2][2] = 9.0;
 
-    buffer_errcode_1 = s21_matrix_for_minor(&src_1_A, 0, 0, &src_1_res);
+    buffer_errcode_1 = s21_create_matrix_for_minor(&src_1_A, 0, 0, &src_1_res);
 
     ck_assert_double_eq_tol(src_1_res.matrix[0][0], 5.0, EPS);
     ck_assert_double_eq_tol(src_1_res.matrix[0][1], 6.0, EPS);
@@ -678,7 +688,7 @@ START_TEST(test_s21_matrix_for_minor) {
     src_2_A.matrix[2][1] = 8.0;
     src_2_A.matrix[2][2] = 9.0;
 
-    buffer_errcode_2 = s21_matrix_for_minor(&src_2_A, 1, 1, &src_2_res);
+    buffer_errcode_2 = s21_create_matrix_for_minor(&src_2_A, 1, 1, &src_2_res);
 
     ck_assert_double_eq_tol(src_2_res.matrix[0][0], 1.0, EPS);
     ck_assert_double_eq_tol(src_2_res.matrix[0][1], 3.0, EPS);
@@ -708,7 +718,7 @@ START_TEST(test_s21_matrix_for_minor) {
     src_3_A.matrix[2][1] = 8.0;
     src_3_A.matrix[2][2] = 9.0;
 
-    buffer_errcode_3 = s21_matrix_for_minor(&src_3_A, 2, 1, &src_3_res);
+    buffer_errcode_3 = s21_create_matrix_for_minor(&src_3_A, 2, 1, &src_3_res);
 
     ck_assert_double_eq_tol(src_3_res.matrix[0][0], 1.0, EPS);
     ck_assert_double_eq_tol(src_3_res.matrix[0][1], 3.0, EPS);
@@ -738,7 +748,7 @@ START_TEST(test_s21_matrix_for_minor) {
     src_4_A.matrix[2][1] = 8.0;
     src_4_A.matrix[2][2] = 9.0;
 
-    buffer_errcode_4 = s21_matrix_for_minor(&src_4_A, 2, 2, &src_4_res);
+    buffer_errcode_4 = s21_create_matrix_for_minor(&src_4_A, 2, 2, &src_4_res);
 
     ck_assert_double_eq_tol(src_4_res.matrix[0][0], 1.0, EPS);
     ck_assert_double_eq_tol(src_4_res.matrix[0][1], 2.0, EPS);
@@ -763,7 +773,7 @@ START_TEST(test_s21_matrix_for_minor) {
     src_5_A.matrix[1][0] = 3.0;
     src_5_A.matrix[1][1] = 4.0;
 
-    buffer_errcode_5 = s21_matrix_for_minor(&src_5_A, 1, 1, &src_5_res);
+    buffer_errcode_5 = s21_create_matrix_for_minor(&src_5_A, 1, 1, &src_5_res);
 
     ck_assert_double_eq_tol(src_5_res.matrix[0][0], 1.0, EPS);
     ck_assert_int_eq(correct_errcode_5, buffer_errcode_5);
@@ -781,7 +791,7 @@ START_TEST(test_s21_matrix_for_minor) {
 
     s21_create_matrix(1, 1, &src_6_A);
 
-    buffer_errcode_6 = s21_matrix_for_minor(&src_6_A, 0, 0, &src_6_res);
+    buffer_errcode_6 = s21_create_matrix_for_minor(&src_6_A, 0, 0, &src_6_res);
 
     ck_assert_int_eq(correct_errcode_6, buffer_errcode_6);
 

@@ -1,13 +1,21 @@
-/**
- * Copyright (с) 2022 Student of School 21:
- * Yonn Argelia
- * yonnarge@student.21-school.ru
+/*
+ * Copyright 2023 Gleb Tolstenev
+ * tolstenev.gleb@mail.ru
  *
  * The s21_matrix.h library is intended for processing numerical matrices
  * in the C programming language.
  *
- * Библиотека s21_matrix.h предназначена для обработки числовых матриц
- * на языке программирования C.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 #ifndef SRC_S21_MATRIX_H_
@@ -55,7 +63,7 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 // Вспомогательные функции бибилиотеки
 int s21_check_matrix(matrix_t *A);
 int s21_is_square_matrix(matrix_t *A);
-int s21_matrix_for_minor(matrix_t *A, int row_skip, int col_skip, matrix_t *result);
+int s21_create_matrix_for_minor(matrix_t *A, int row_skip, int col_skip, matrix_t *result);
 double s21_calc_minor(matrix_t *A, int row_skip, int col_skip);
 double s21_calc_determinant(matrix_t *A);
 double s21_calc_one_complement(matrix_t *A, int row_skip, int col_skip);
